@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #background{
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <div id="background">
+        <img src="http://mblogthumb2.phinf.naver.net/20160428_141/mkhjsk_146182964215447y4G_PNG/21.png?type=w2">
+    </div>
+    <button id="offBtn">끄기</button>
+    <button id="onBtn">켜기</button>
+</body>
+<script>
+    var off = document.getElementById('offBtn');
+    var on = document.getElementById('onBtn');
+    var backGround = document.getElementById('background');
+
+    off.addEventListener('click' , function(e){
+        backGround.style.backgroundColor = "black";
+    });
+
+    on.addEventListener('click' , function(e){
+        backGround.style.backgroundColor = "#fff";
+    });
+
+</script>
+</html>
