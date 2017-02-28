@@ -4,12 +4,24 @@
     <meta charset="UTF-8">
     <title></title>
     <style>
+        .light{
+            width: 70px;
+            height: 70px;
+            background-color: yellow;
+            position: absolute;
+            left : 70px;
+            top : 20px;
+            border-radius: 50%;
+        }
         #background{
             background-color: black;
         }
     </style>
 </head>
 <body>
+    <div class="light" id="light">
+
+    </div>
     <div id="background">
         <img src="http://mblogthumb2.phinf.naver.net/20160428_141/mkhjsk_146182964215447y4G_PNG/21.png?type=w2">
     </div>
@@ -18,15 +30,18 @@
 <script>
     var on = document.getElementById('onBtn');
     var backGround = document.getElementById('background');
+    var light = document.getElementById('light');
     var bol = false;
 
     on.addEventListener('click' , function(e){
-        if(!bol){
+        if(bol){
             backGround.style.backgroundColor = "black";
-            bol = true;
+            light.style.backgroundColor = "yellow";
+            bol = false;
         }else{
             backGround.style.backgroundColor = "#fff";
-            bol = false;
+            light.style.backgroundColor = "#fff";
+            bol = true;
         }
     });
 
