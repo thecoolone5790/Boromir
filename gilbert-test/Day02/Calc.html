@@ -1,17 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>Calc</title>
+    <style>
+        button{
+            width: 100%;
+            height: 70px;
+        }
+        table{
+            border: 1px solid #000000;
+            width:400px;
+            height:300px;
+            color: #0fff10;
+        }
+        .showView{
+            height: 50px;
+            background: #000000;
+            font-size:40px;
+            text-align: right;
+            padding-right: 10px;
+        }
+    </style>
 </head>
 <body>
-        <table style="border: 1px solid #000000;color: #fff" id="calc">
+<h1>계산기</h1>
+        <table  id="calc">
             <tr>
-                <td colspan="4" style="background: #000000" id="showView"></td>
+                <td colspan="4" class="showView" id="showView"></td>
             </tr>
             <tr>
-                <td><button value="C">C</button></td>
-                <td><button value="change">+/-</button></td>
+                <td colspan="2"><button value="C">C</button></td>
                 <td><button value="%">%</button></td>
                 <td><button value="/">/</button></td>
             </tr>
