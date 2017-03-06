@@ -1,0 +1,951 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- // 검색창 활성화시 on_search 클래스 활성화, 메뉴 활성화시 menu_open 클래스 활성, 포스트 수정 레이어 활성화시 open_admin 활성화, sns 활성화시 open_sns 활성화 -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
+    <link rel="alternate" type="application/rss+xml" title="[##_title_##]" href="[##_rss_url_##]" />
+    <link rel="stylesheet" media="screen" type="text/css" href="./style.css" />
+    <link rel="shortcut icon" href="[##_blog_link_##]favicon.ico" />
+    <title>[##_title_##]</title>
+
+    <!--[if lt IE 9]>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <!--[if gte IE 9]><!-->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!--<![endif]-->
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+</head>
+<body id="[##_body_id_##]">
+<s_t3>
+    <div id="daumIndex">
+        <a href="#daumBody">본문 바로가기</a>
+        <a href="#daumGnb">메뉴 바로가기</a>
+    </div>
+    <div id="container" class="daumkakao_blog">
+        <div id="header" class="head_daumkakao">
+            <h1 class="logo_daumkakao">
+                <a href="[##_blog_link_##]" class="link_logo"><span class="img_blog ico_logo">daumkakao 블로그</span></a>
+            </h1>
+            <div class="services_relation">
+                <h2 class="screen_out">관련서비스</h2>
+                <a href="http://www.daumkakao.com/pr/pressRelease" target="_blank" class="link_services">
+                    NEWSROOM
+                </a>
+                <span class="txt_bar">|</span>
+                <a href="https://blog.daumkakao.com/" target="_blank" class="link_services">
+                    GLOBAL BLOG
+                </a>
+            </div>
+            <div id="daumGnb" class="gnb_blog">
+                <h2 class="tit_blog"><a href="[##_blog_link_##]" class="img_blog link_tit">daumkakao 블로그 메인 메뉴</a></h2>
+                <ul class="list_menu">
+                    <li><!-- // 선택되었을 시 on 클래스 활성화 -->
+                        <a href="/category/새소식" class="link_menu">
+                            <span class="inner_menu">새소식</span>
+                        </a>
+                    </li>
+                    <li class="on">
+                        <a href="/category/이야기" class="link_menu">
+                            <span class="inner_menu">이야기</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/category/이벤트" class="link_menu">
+                            <span class="inner_menu">이벤트</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/category/같이가치" class="link_menu">
+                            <span class="inner_menu">같이가치</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <button type="button" class="btn_sidemenu">
+                <span class="img_blog ico_sidemenu">daumkakao 블로그 메인메뉴 열기</span>
+            </button>
+            <div class="menu_side">
+                <div class="inner_side">
+                    <strong class="tit_sidemenu"><a href="[##_blog_link_##]" class="link_tit">DAUM KAKAO<br />OFFICAIAL BLOG</a></strong>
+                    <strong class="screen_out">daumkakao 블로그 메인 메뉴</strong>
+                    <ul class="list_menu">
+                        <li><!-- // 선택되었을 시 on 클래스 활성화 -->
+                            <a href="/category/새소식" class="link_menu">
+                                <span class="inner_menu">새소식</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/category/이야기" class="link_menu">
+                                <span class="inner_menu">이야기</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/category/이벤트" class="link_menu">
+                                <span class="inner_menu">이벤트</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/category/같이가치" class="link_menu">
+                                <span class="inner_menu">같이가치</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="foot_side">
+                        <div class="services_relation">
+                            <strong class="screen_out">관련서비스</strong>
+                            <a href="http://www.daumkakao.com/pr/pressRelease" target="_blank" class="link_services">
+                                NEWSROOM
+                            </a>
+                            <span class="txt_bar">|</span>
+                            <a href="https://blog.daumkakao.com/" target="_blank" class="link_services">
+                                GLOBAL BLOG
+                            </a>
+                        </div>
+                        <small class="txt_foot info_copyright">Copyright <a href="http://www.daumkakao.com/" target="_blank" class="link_copyright">© Daum Kakao Corp.</a></small>
+                        <div class="opt_foot"><!-- opt_open 시 열림 -->
+                            <span class="screen_out">선택내용 : </span>
+                            <a href="javascript:;" class="link_relation">
+                                <span class="txt_year">관련사이트</span>
+                                <span class="img_blog ico_arrow">열기</span><!-- 활성화시 접기, 비활성화시 열기 -->
+                            </a>
+                            <span class="screen_out">선택옵션</span>
+                            <ul class="list_relation">
+                                <li><a href="http://www.daumkakao.com/main" class="link_option" target="_blank">다음카카오</a></li>
+                                <li><a href="http://www.daum.net" class="link_option" target="_blank">다음 포털사이트</a></li>
+                                <li><a href="http://www.kakao.com" class="link_option" target="_blank">카카오 서비스</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button type="button" class="btn_close">
+                        <span class="img_blog ico_close">daumkakao 블로그 메인메뉴 닫기</span>
+                    </button>
+                </div>
+            </div>
+            <s_sidebar_element>
+                <div class="search_blog">
+                    <button type="button" class="btn_top btn_search">
+                        <span class="img_blog ico_search">검색창 펼치기</span>
+                    </button>
+                    <div class="wrap_search">
+                        <s_search>
+				<span class="box_search">
+					<input type="search" id="tfSearch" name="[##_search_name_##]" class="tf_search" value="[##_search_text_##]" onkeypress="if (event.keyCode == 13) { [##_search_onclick_submit_##] }" title="검색어" placeholder="Search" />
+				</span>
+                            <button type="button" class="btn_close"><span class="img_blog ico_close">검색창 닫기</span></button>
+                        </s_search>
+                    </div>
+                </div>
+            </s_sidebar_element>
+        </div>
+        <hr class="hide" />
+        <div id="content" class="cont_daumkakao">
+            <h2 id="daumBody" class="screen_out">daumkakao 블로그 본문</h2>
+            <s_list>
+                <div class="searchList">
+                    <h3 class="tit_category"><!-- // scroll 내릴시 ani_opacity 클래스 활성화, scroll 올릴시 ani_opacity 클래스 활성화 -->
+                        [##_list_conform_##]
+                    </h3>
+                    <ul class="list_category">
+                        <s_list_rep>
+                            <li>
+                                <div class="cont_category">
+                                    <a href="#" class="link_thumb" >
+                                        <img src="[##_list_rep_link_##]" class="thumb_img" />
+                                        <!-- // 이미지 경로 배경 이미지 경로가 동일하게 제어 -->
+
+                                        <!-- // 본문 메인 이미지의 alt 값 -->
+                                    </a>
+                                    <a href="[##_list_rep_link_##]" class="link_cont">
+                                        <span class="line_intro"></span>
+                                        <strong class="tit_subject">[##_list_rep_title_##]</strong>
+                                        <span class="data_append">[##_list_rep_regdate_##]</span>
+                                        <span class="txt_desc"></span>
+                                        <span class="img_blog ico_arrow"></span>
+                                    </a>
+                                </div>
+                            </li>
+                        </s_list_rep>
+                    </ul>
+                </div>
+            </s_list>
+            <s_article_rep>
+                <div class="entry">
+                    <div class="intro_entry">
+                        <h4 class="tit_subject"><a href="[##_article_rep_link_##]" class="link_tit">[##_article_rep_title_##]</a></h4>
+                        <div class="data_append">[##_article_rep_date_##]</div>
+                        <s_ad_div>
+                            <div class="admin_append">
+                                <button type="button" class="btn_admin">포스트 수정하기</button>
+                                <div class="layer_admin">
+                                    <div class="inner_layer">
+                                        <div class="body_layer">
+                                            <a href="[##_s_ad_m_link_##]" class="link_admin">수정</a>
+                                            <a href="#" onclick="[##_s_ad_d_onclick_##]" class="link_admin">삭제</a>
+                                            <a href="#" onclick="[##_s_ad_t_onclick_##]" class="link_admin">관련글(트랙백)</a>
+                                        </div>
+                                        <div class="foot_layer">
+                                            <button type="button" class="btn_cancel">취소</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </s_ad_div>
+                        <div id="btnSocialShareContainer" class="sns_blog">
+                        </div>
+                    </div>
+                    <div class="cont_entry">
+                        [##_article_rep_desc_##]
+                    </div>
+                    <a href="#rp"  onclick="[##_article_rep_rp_link_##]" class="link_cmt"><span class="img_blog ico_cmt">댓글 갯수</span><span class="num_cmt">[##_article_rep_rp_cnt_##]</span></a>
+                    <s_rp>
+                        <div class="cmt_entry">
+                            <div class="list_cmt">
+                                <s_rp_container>
+                                    <s_rp_rep>
+                                        <div id='[##_rp_rep_id_##]' class="item_cmt [##_rp_rep_class_##]">
+						<span class="info_append">
+							<span class="writer_info">[##_rp_rep_name_##]</span>
+							<span class="txt_time"> [##_rp_rep_date_##]</span>
+						</span>
+                                            <p class="txt_desc">[##_rp_rep_desc_##]</p>
+                                            <div class="control_cmt"><!-- // 댓글 관리 레이어 활성화시 open_control 클래스 활성화 -->
+                                                <button type="button" class="btn_control"><span class="img_blog ico_control">댓글 관리</span></button>
+                                                <div class="wrap_control">
+                                                    <span class="img_blog ico_arrow"></span>
+                                                    <a href="[##_rp_rep_link_##]" class="link_control">댓글주소</a>
+                                                    <a href="#" onclick="[##_rp_rep_onclick_delete_##]" class="link_control">수정/삭제</a>
+                                                    <a href="#" onclick="[##_rp_rep_onclick_reply_##]" class="link_control">댓글쓰기</a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <s_rp2_container>
+                                            <s_rp2_rep>
+                                                <div id='[##_rp_rep_id_##]' class="item_reply [##_rp_rep_class_##]">
+                                                    <div class="inner_reply">
+							<span class="info_append">
+								<span class="writer_info">[##_rp_rep_name_##]</span>
+								<span class="txt_time">[##_rp_rep_date_##]</span>
+							</span>
+                                                        <p class="txt_desc">[##_rp_rep_desc_##]</p>
+                                                        <div class="control_cmt"><!-- // 댓글 관리 레이어 활성화시 open_control 클래스 활성화 -->
+                                                            <button type="button" class="btn_control"><span class="img_blog ico_control">댓글 관리</span></button>
+                                                            <div class="wrap_control">
+                                                                <span class="img_blog ico_arrow"></span>
+                                                                <a href="[##_rp_rep_link_##]" class="link_control">댓글주소</a>
+                                                                <a href="#" onclick="[##_rp_rep_onclick_delete_##]" class="link_control">수정/삭제</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </s_rp2_rep>
+                                        </s_rp2_container>
+                                    </s_rp_rep>
+                                </s_rp_container>
+                            </div>
+                            <s_rp_input_form>
+                                <div class="write_cmt">
+                                    <s_rp_member>
+                                        <s_rp_guest>
+                                            <dl class="info_user">
+                                                <dt class="screen_out"><label for="userName">이름</label></dt>
+                                                <dd class="desc_user">
+                                                    <span class="inner_desc"><input type="text" id="userName" name="[##_rp_input_name_##]" class="tf_cmt tf_user" value="[##_guest_name_##]" placeholder="이름" /></span>
+                                                </dd>
+                                                <dt class="screen_out"><label for="userPassword">암호</label></dt>
+                                                <dd class="desc_user">
+                                                    <span class="inner_desc"><input type="password" id="userPassword" maxlength="8" name="[##_rp_input_password_##]" class="tf_cmt tf_user" value="[##_rp_admin_check_##]" placeholder="암호" /></span>
+                                                </dd>
+                                            </dl>
+                                        </s_rp_guest>
+                                    </s_rp_member>
+                                    <textarea name="[##_rp_input_comment_##]" rows="4" cols="50" class="tf_cmt tf_area" placeholder="덧글을 입력해 주세요."></textarea>
+                                    <button type="submit" class="btn_submit" onclick="[##_rp_onclick_submit_##]">댓글입력</button>
+                                </div>
+                            </s_rp_input_form>
+                        </div>
+                    </s_rp>
+                </div>
+            </s_article_rep>
+            <s_paging>
+                <div class="paging_blog">
+				<span class="inner_paging">
+					<a [##_prev_page_##] class="btn_page btn_prev [##_no_more_prev_##]"><span class="img_blog ico_prev"></span><span class="txt_paging">이전</span></a>
+					<span class="wrap_paging">
+						<s_paging_rep> <a [##_paging_rep_link_##] class="link_page">[##_paging_rep_link_num_##]</a> </s_paging_rep><!-- // 선택시 on_page 클래스 활성화 -->
+					</span>
+					<a [##_next_page_##] class="btn_page btn_next [##_no_more_next_##]"><span class="txt_paging">다음</span><span class="img_blog ico_next"></span></a>
+				</span>
+                </div>
+            </s_paging>
+            <a href="javascript:void(0)" class="img_blog link_top">TOP</a>
+        </div>
+        <hr class="hide" />
+        <div id="footer" class="foot_daumkakao">
+            <div class="inner_foot">
+                <h2 class="screen_out">서비스 이용정보</h2>
+                <div class="wrap_foot f_l version_pc">
+                    <a href="http://www.daumkakao.com/" class="link_daumkakao"><span class="img_blog ico_daumkakao">daumkakao</span></a>
+                    <small class="txt_foot info_copyright">Copyright <a href="http://www.daumkakao.com/" target="_blank" class="link_copyright">© Daum Kakao Corp.</a></small>
+                </div>
+                <div class="wrap_foot f_r">
+                    <div class="area_foot">
+                        <strong class="tit_foot">다음카카오 공식채널</strong>
+                        <ul class="list_chanel">
+                            <li>
+                                <a href="https://www.facebook.com/daumkakaoglobal" target="_blank" class="link_chanel">
+                                    <span class="img_blog chanel_facebook">페이스북</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/daumkakaoglobal" target="_blank" class="link_chanel">
+                                    <span class="img_blog chanel_twitter">트위터</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://story.kakao.com/ch/daumkakao" target="_blank" class="link_chanel">
+                                    <span class="img_blog chanel_story">스토리 채널</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="subRssFeed" class="email_send">
+                        <strong class="tit_foot">SUBSCRIBE</strong>
+                        <p class="txt_foot">다음카카오 이야기, 이메일로 받아보세요.</p>
+                        <form action="http://feedburner.google.com/fb/a/mailverify" class="email_form" method='post'
+                              target='popupwindow' onsubmit="window.open('http://feedburner.google.com/fb/a/mailverify?uri=daumcorp/Qvyp', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true;">
+                            <fieldset class="fld_email">
+                                <legend class="screen_out">이메일 받아보기 폼</legend>
+                                <label class="lab_email screen_out" for="formEmail">이메일 주소 입력</label>
+                                <input type='text' class="tf_mail bg_on" id="formEmail"
+                                       onfocus="this.className='tf_mail';document.getElementById('subRssFeed').setAttribute('class','email_send email_on');"
+                                       onblur="this.className='tf_mail bg_on';document.getElementById('subRssFeed').setAttribute('class','email_send');" name='email' title="이메일 받아보기" placeholder="example@example.com" />
+                                <input type="hidden" value="daumcorp/Qvyp" name="uri"/>
+                                <input type="hidden" name="loc" value="en_US"/>
+                                <button class="btn_send" type="submit" name='imageField' value='Subscribe'><span class="img_blog ico_send">이메일 보내기</span></button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <div class="wrap_foot f_l">
+                    <div class="area_foot">
+                        <img src="http://cfs.tistory.com/custom/blog/166/1669615/skin/images/thumb_img.png" class="thumb_bnr" alt="Connect Everything." />
+                    </div>
+                    <div class="version_pc">
+                        <strong class="tit_foot">ABOUT US</strong>
+                        <p class="txt_foot">The official blog of Daum Kakao,<br />a Mobile Lifestyle Platform company.</p>
+                        <div class="opt_foot"><!-- opt_open 시 열림 -->
+                            <span class="screen_out">선택내용 : </span>
+                            <a href="javascript:;" class="link_relation">
+                                <span class="txt_year">관련사이트</span>
+                                <span class="img_blog ico_arrow">열기</span><!-- 활성화시 접기, 비활성화시 열기 -->
+                            </a>
+                            <span class="screen_out">선택옵션</span>
+                            <ul class="list_relation">
+                                <li><a href="http://www.daumkakao.com/main" class="link_option" target="_blank">다음카카오</a></li>
+                                <li><a href="http://www.daum.net" class="link_option" target="_blank">다음 포털사이트</a></li>
+                                <li><a href="http://www.kakao.com" class="link_option" target="_blank">카카오 서비스</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</s_t3>
+
+
+
+<script type="text/javascript" src="http://s1.daumcdn.net/svc/original/U03/cssjs/pcsocialshare/pcSocialshare-1.5.1.min.js"></script>
+
+<!-- SNS 공유 PC 버전 -->
+<script>
+    var BLOG_KAKAO_KEY = 'b8aef3eeb03fa312b81795386484f051';
+</script>
+
+
+<script src="http://m1.daumcdn.net/svc/original/U03/cssjs/coco/coco-1.0.25.min.js"></script>
+<!--[if lte IE 8]>
+<script src="http://m1.daumcdn.net/svc/original/U03/cssjs/sizzle/sizzle-1.10.7.min.js"></script>
+<script src="http://m1.daumcdn.net/svc/original/U0301/cssjs/JSON-js/fc535e9cc8/json2.min.js"></script>
+<![endif]-->
+
+<script type="text/javascript">
+    $(function(){
+
+        var listObj = new Array();
+        var slideFlag = true;
+        var interval;
+        var $entry = $(".entry");
+
+        var blog = {
+            "init" : function(){
+                this.page.exec();
+                this.event();
+                this.util.pageType();
+                this.util.pageTitle();
+                this.basic();
+            }
+            ,
+            "util" : {
+                /* 타이틀 줄바꿈 처리 */
+                "brTitle" : function(){
+                    console.log("test");
+                }
+                ,
+                /* sns 공유 기능 */
+                "sns" : function(){
+                    var metaData = this.getMetaData();
+
+
+                    /* PC ver */
+                    if($("#content").children().hasClass("entry")){
+                        var btnEl = document.getElementById('btnSocialShareContainer');
+                        new pcSocialshare(btnEl, {
+                            shareType: 'button',
+                            link: metaData.url,
+                            prefix: metaData.title
+                        });
+                    }
+
+                    $(".share_sns .layer_sharesns").prepend("<div class='inner_layer'><div class='body_layer'></div></div>");
+                    $(".share_sns .body_layer").append( $(".layer_sharesns a") );
+                    $(".share_sns .inner_layer").append('<div class="foot_layer"><button type="button" class="btn_cancel">취소</button></div>');
+
+                    $(".share_sns .layer_sharesns a").each(function( ){
+                        var sns_txt = $(this).text();
+                        $(this).append("<span class='txt_sns'>"+sns_txt+"</span>");
+                        $(this).find(".img_g").text('');
+                        $(this).find("span").each(function(){
+                            if( $(this).hasClass("ico_sns_mp") ){
+                                $(this).removeClass("ico_sns_mp").addClass("ico_sns_story");
+                            }
+                        })
+                    })
+
+                }
+                ,
+                /* 현재 페이지 URL*/
+                "currentUrl" : function(){
+                    var url = window.location.pathname;
+                    return url;
+                }
+                /* 모바일 , PC 구분 */
+                ,
+                "isMobile" : function(){
+
+                }
+                /* 페이지 타입 (메인, 리스트, 뷰)  */
+                ,
+                "pageType" : function(){
+                    var url = this.currentUrl();
+                    var pageType;
+                    var categoryType;
+
+                    try{
+                        url = url.split("/");
+                    }catch(e){
+                        console.log(e+" : pageType");
+                    }
+
+
+                    // 페이지 렌더링 값 셋팅.
+
+                    if( $.isNumeric( url[1] ) ){ url[1] = "view"; }
+                    switch(url[1]){
+                        case "category"  : pageType = "list";
+                            break;
+                        case "search"    : pageType = "list";
+                            break;
+                        case "tag"       : pageType = "list";
+                            break;
+                        case "view"      : pageType = "view";
+                            break;
+                        default          : pageType = "main";
+                            break;
+                    }
+
+
+                    if(url[2]){
+                        // 선택된 카테고리 영역 인자값 셋팅.
+                        console.log(decodeURIComponent(url[2]));
+                        switch( decodeURIComponent(url[2]) ){
+                            case "새소식"  : categoryType = 0;
+                                break;
+                            case "이야기"  : categoryType = 1;
+                                break;
+                            case "이벤트"  : categoryType = 2;
+                                break;
+                            case "같이가치" : categoryType = 3;
+                                break;
+                        }
+                    }
+
+
+                    // 카테고리 영역 활성화 ( 카테고리 밑줄 )
+                    this.setCategory(categoryType);
+
+                    return pageType;
+                }
+                ,
+                "getMetaData" : function(){
+                    /* 페이지 title 및 sns 값 대입 용 데이터. */
+                    var metaObj = new Object();
+                    metaObj.title = $('meta[property="og:title"]').attr('content');
+                    metaObj.url = $('meta[property="og:url"]').attr('content');
+                    metaObj.desc = $('meta[property="og:description"]').attr('content');
+                    metaObj.site = $('meta[property="og:site_name"]').attr('content');
+                    return metaObj;
+                }
+                ,
+                "setCategory" : function( idx ){
+
+                    // 선택된 카테고리 초기화 (삭제)
+                    $(".list_menu li, .inner_side ul li").removeClass("on");
+
+                    if(idx!=undefined){
+                        // pc
+                        $(".list_menu li").eq( idx ).addClass("on");
+                        // mobile
+                        $(".inner_side ul li").eq( idx ).addClass("on");
+                    }
+                }
+                ,
+                "resizeMovie" : function() {
+                    var windowsize = $(window).width();
+                    var originalWidth = $(".cont_entry iframe").css("width");
+                    var originalHeight = $(".cont_entry iframe").css("height");
+
+                    /* 모바일 ver */
+                    if(windowsize<700){
+                        var resizeHight = windowsize / 1.77;
+                        $(".cont_entry iframe").css("height",resizeHight).css("width","100%")
+
+                    }else{
+                        /* PC ver */
+                        $(".cont_entry iframe").css("height",originalHeight).css("width",originalWidth)
+                        /* 뷰 페이지 SNS 버튼 PC, 모바일에 따른 id명 변경.*/
+                    }
+                }
+                ,
+                "imgSlide" : function(){
+                    if(slideFlag==true){
+                        interval = setInterval(function(){
+                            $(".paging_control .btn_next").click();
+                        }, 5000);
+                    }else{
+                        clearInterval(interval);
+                    }
+                }
+                ,
+                /* 브라우저 페이지 타이틀 설정 */
+                "pageTitle" : function(){
+                    var metaData = this.getMetaData();
+                    var category = $(".link_category").text();
+                    // page title 설정.
+                    var pageType = this.pageType();
+                    var pageTitle = "";
+                    switch(pageType){
+                        case "main" : pageTitle = metaData.site;
+                            break;
+                        case "list" : pageTitle = category + " | " + metaData.site;
+                            break;
+                        case "view" : pageTitle = metaData.title + " - " + category + " | " + metaData.site;
+                            break;
+                        default     : pageTitle = metaData.site;
+                            break;
+                    }
+                    $(document).attr("title", pageTitle);
+                }
+            }
+            ,
+            "page"  : {
+                "main" : function(){
+                    var top_title = "";
+                    top_title += '<div class="intro_main">';
+                    top_title += '  <strong class="tit_intro">새로운 연결, 새로운 세상</strong>';
+                    top_title += '  <p class="txt_intro">Connect Everything</p>';
+                    top_title += '</div>';
+
+                    $("#daumBody").after(top_title);
+
+                    // 더보기 버튼 삽입
+                    var btn_view_more = "";
+                    btn_view_more ='<a href="#none" class="link_more">더보기<span class="img_blog ico_more"></span></a>';
+                    $(".list_latest").after(btn_view_more);
+
+                    // 더보기 버튼 기능구현.
+                    $(".list_latest li").hide();
+
+                    $(".list_latest li").each(function(){
+
+                        if($(this).html()){
+                            listObj.push($(this));
+                        }
+
+                        // 목록 타이틀 <br> 태그 삭제.
+                        var sub_title = $(this).find(".txt_subject").text().replace("<br />","").replace("<br/>","");
+                        $(this).find(".txt_subject").text(sub_title);
+
+                        $(this).remove();
+                    })
+
+
+                    $(".list_featured li").each(function(){
+                        // 이미지 슬라이드 타이틀 "<br />" 문구 제거.
+                        $(this).find(".link_txt").each(function(){
+                            var n_title = $(this).text().replace("<br />","").replace("<br/>","");
+                            $(this).text( n_title );
+
+                        })
+                    })
+
+                    // 초기 리스트 출력.
+                    this.show_list(listObj);
+                    // 이미지 슬라이드
+                    blog.util.imgSlide();
+                }
+                ,
+                "list" : function(){
+
+                    $entry.each(function(i){
+
+                        /* 리스트 타이틀 <br /> 문구 삭제 */
+                        var new_title = $(this).find(".tit_subject").text().replaceAll("<br />","").replaceAll("<br/>","");
+                        $(".list_category li").eq(i).find(".tit_subject").text( new_title );
+
+                        /* 리스트 본문글 발췌 */
+                        var new_desc = $.trim( $(this).find(".cont_entry").text() );
+                        if( new_desc.length > 50 ){ new_desc = new_desc.substr( 0 , 50 )+"..."; }
+
+                        $(".list_category li").eq(i).find(".txt_desc").text( new_desc );
+
+
+                        /* 리스트 이미지 출력 */
+                        $(this).find(".cont_entry img").each(function(){
+                            if($(this).attr("width") >= 600){
+                                img_src = $(this).attr("src");
+                                $(".list_category li").eq(i).find(".link_thumb img").attr("src",img_src);
+                                return false;
+                            }
+                        })
+                        $(this).hide();
+                    })
+                }
+                ,
+                "view" : function(){
+                    /* 대표 이미지 설정 */
+                    var img_src,
+                        img_main;
+
+                    $entry.each(function(){
+                        $(this).find(".imageblock img").each(function(){
+                            if($(this).attr("width") >= 600){
+
+                                img_src = $(this).attr("src");
+
+                                img_main = ' <div class="img_main">';
+                                img_main += '  <span class="imageblock" style="display:inline-block;width:940px;text-align: center; font-size: 9pt; line-height: 1.5;;height:auto">';
+                                img_main += '      <span dir="'+ img_src +'" rel="lightbox" target="_blank">';
+                                img_main += '        <img src="'+ img_src +'" height="530" style="text-align: center; font-size: 9pt; line-height: 1.5;" width="940">';
+                                img_main += '      </span>';
+                                img_main += '    </span>';
+                                img_main += '</div>';
+
+                                $(this).remove();
+                                return false;
+
+                            }
+                        })
+                        $(this).prepend(img_main);
+                        img_main = "";
+
+                        // 컨텐츠 불필요 줄바꿈 삭제
+                        $(this).find(".cont_entry p").each(function(){
+
+                            if($(this).html()=="&nbsp;" || $(this).find("span").html()=="<br>" ){
+                                $(this).remove();
+                            }
+                            if( !$(this).find("span").html() ){
+                                $(this).remove();
+                            }
+
+                        })
+
+
+                        /* 뷰페이지 타이틀 <br /> 문구에서 줄바꿈 처리  2줄까지 지원 */
+                        var title = $(this).find(".tit_subject a").text();
+                        var title_splitFlag = false;
+
+                        if( title.indexOf("<br />") > 0 ){
+                            title = title.split("<br />");
+                            title_splitFlag = true;
+                        }else if( title.indexOf("<br/>") > 0 ){
+                            title = title.split("<br/>");
+                            title_splitFlag = true;
+                        }
+
+                        if( title_splitFlag ){
+                            $(this).find(".tit_subject a").clone().appendTo( $(this).find(".tit_subject") );
+                            $(this).find(".link_tit").each(function(index){
+                                $(this).text(title[index]).append("<br/>");
+                            });
+                        }
+
+                        /* 뷰페이지 이미지 가운데 정렬 */
+                        $( ".cont_entry p :has(img)" ).not( $(this).width() < 30 ).parent().css("text-align","center");
+                    })
+
+
+                    // 상단 페이드 info 영역 ( 이전글, 현재 페이지, 다음글 )
+                    var current_page_num = $(".link_page .selected").text();
+                    var total_page_num   = $(".wrap_paging a").last().text();
+                    var view_info = "";
+                    <!-- // scroll 내릴시 ani_opacity 클래스 활성화, scroll 올릴시 ani_opacity 클래스 활성화 -->
+                        view_info =   '<s_paging><div class="paging_entry">';
+                    view_info +=  ' <div class="inner_paging">';
+                    view_info +=  '   <a href="#none" class="link_paging link_prev">';
+                    view_info +=  '     <span class="img_blog ico_prev"></span>';
+                    view_info +=  '     <span class="txt_paging">이전글</span>';
+                    view_info +=  '   </a>';
+                    view_info +=  '   <span class="count_page"><span class="screen_out">현재 보고 있는 글</span>'+current_page_num+' / <span class="screen_out">전체 글</span>'+total_page_num+'</span>';
+                    view_info +=  '   <a href="#none" class="link_paging link_next">';
+                    view_info +=  '     <span class="txt_paging">다음글</span>';
+                    view_info +=  '     <span class="img_blog ico_next"></span>';
+                    view_info +=  '	  </a>';
+                    view_info +=  ' </div>';
+                    view_info +=  '</div></s_paging>';
+
+                    $(".paging_blog").after(view_info);
+
+                    // 동영상 리사이즈
+                    blog.util.resizeMovie();
+                    // SNS 공유기능 호출.
+                    blog.util.sns();
+
+                }
+                ,
+                "exec" : function(){
+                    var pageType = blog.util.pageType();
+
+                    switch(pageType){
+                        case "main" : this.main();
+                            break;
+                        case "list" : this.list();
+                            break;
+                        case "view" : this.view();
+                            break;
+                    }
+                }
+                ,
+                "show_list" : function(listObj) {
+
+                    (listObj.length>= 6) ? cnt= 6 : cnt=listObj.length;
+
+                    for( var i = 0; i< cnt; i++){
+                        $(".list_latest").append( listObj.shift() );
+                    }
+                    $(".list_latest li").fadeIn(1000);
+                    if(listObj.length == 0) { $(".link_more").hide(); return false; }
+                }
+            }
+            ,
+            "event" : function(){
+
+                // 뷰 페이지 댓글 수정/삭제, 댓글쓰기 레이어 펼치기.
+                $( "body" ).delegate( ".control_cmt", "click", function() {
+                    $(".wrap_control").slideUp(250);
+                    if($(this).children(".wrap_control").css("display") == "none"){
+                        $(this).children(".wrap_control").slideDown(250);
+                    }
+
+                });
+
+                // 뷰 페이지 포스트 수정하기
+                $( "body" ).delegate( ".admin_append", "click", function() {
+                    $(this).children(".layer_admin").toggle();
+                });
+
+                // 댓글 아닌 영역 클릭시 댓글 수정 레이어 닫힘.
+                $("#content").click(function(){
+                    $(".wrap_control").slideUp(250);
+                })
+
+                $(".btn_cancel").click(function(){
+                    $(".layer_admin").hide();
+                })
+
+
+
+                /* 마우스 스크롤 이벤트 */
+                var lastScroll = 0;
+
+                var deviceAgent = navigator.appVersion;
+                var agentIndex  = deviceAgent.indexOf('Android');
+                var isCanAnimation = true;
+
+                if (agentIndex != -1) {
+                    var androidversion = parseFloat(deviceAgent.match(/Android\s+([\d\.]+)/)[1]);
+                    if (androidversion < 4.3){
+                        isCanAnimation = false;
+                    }
+                }
+
+                if(isCanAnimation){
+                    // 모바일 에서 최상단 이동시 뷰페이지 info 노출 (이전, 다음글..).
+
+                    $(window).scroll(function(event){
+                        var st = $(this).scrollTop();
+                        var hasClass = $(".paging_entry").hasClass("ani_opacity");
+
+
+                        if (st > lastScroll){ // Down
+
+                            if( !hasClass ){
+                                $(".paging_entry").addClass("ani_opacity");
+                            }
+
+                            if($(document).scrollTop()<100){
+                                $(".paging_entry").removeClass("ani_opacity");
+                            }
+                        }
+                        else {
+                            $(".paging_entry").removeClass("ani_opacity");
+                        }
+
+                        lastScroll = st;
+                        //event.stopPropagation();
+                    });
+                }
+
+
+
+                /* 탑 버튼 */
+                $( "body" ).delegate( ".link_top", "click", function() {
+                    $('html, body').stop().animate({
+                        scrollTop: 0
+                    }, 1000);
+                });
+
+                /* 뷰페이지 상단 페이드 info (이전글 , 다음글)*/
+                var btn_prev = $(".btn_prev").attr("href");
+                var btn_next = $(".btn_next").attr("href");
+                $( "body" ).delegate( ".link_prev", "click", function() {
+                    if(btn_prev){
+                        $(this).attr("href",btn_prev);
+                    }else{
+                        $(this).attr("href","#")
+                    }
+
+                });
+                $( "body" ).delegate( ".link_next", "click", function() {
+                    if(btn_next){
+                        $(this).attr("href",btn_next)
+                    }else{
+                        $(this).attr("href","#")
+                    }
+                });
+
+
+                /* 메인 페이지 이미지 슬라이드 */
+                $(".paging_control .btn_next").click(function(){  // 다음
+
+                    slideNum = (slideNum < 4 - 1) ? slideNum + 1 : 0;
+                    $(".num_current").text(slideNum+1);
+                    _showItem(targetElems,slideNum);
+
+                })
+                $(".paging_control .btn_prev").click(function(){  // 이전
+
+                    slideNum = (slideNum < 1 ) ?  3 : slideNum - 1;
+                    $(".num_current").text(slideNum+1);
+                    _showItem(targetElems,slideNum);
+                })
+
+
+                // 메인페이지 이미지 슬라이드 영역에 마우스 있을시 자동 넘김 방지
+                $(".featured_main").mouseover(function(){
+                    slideFlag = false;
+                    blog.util.imgSlide();
+                })
+                $(".featured_main").mouseleave(function(){
+                    slideFlag = true;
+                    blog.util.imgSlide();
+                })
+
+
+
+                /* footer 관련 사이트 */
+                $(".opt_foot").click(function(){
+                    $(".list_relation").slideToggle();
+                })
+
+                /* sns 공유 버튼 (열고,펼치기) */
+                $( ".btn_sns" ).click( function() {
+                    $("html").toggleClass("open_sns");
+                });
+
+                /* 모바일 sns 취소 버튼 */
+                $(".btn_cancel").click(function(){
+                    $( ".sns_comm" ).removeClass("sns_on");
+                    $( "html" ).removeClass("open_sns");
+                    return false;
+                })
+
+                /* 메인페이지 리스트 더보기 */
+                $(".link_more").click(function(){
+                    blog.page.show_list(listObj);
+                })
+
+                /* 모바일 사이드 메뉴 열기 */
+                $(".btn_sidemenu").click(function(){
+                    $("html").addClass("menu_open");
+                    $(".menu_side").css("display","block");
+                })
+
+
+                /* 모바일 사이드 메뉴 닫기 */
+                $(".btn_close").click(function(){
+                    $("html").removeClass("menu_open");
+
+                    // 사이드메뉴 닫힘 효과 후 화면 밝히기.
+                    $.when(this).done(function() {
+                        setTimeout(function(){
+                            $(".menu_side").css("display","none");
+                        }, 1000);
+                    });
+
+                });
+
+
+                /* 검색 */
+                $(".search_blog .btn_search").click(function(){
+                    $("html").addClass("on_search");
+                })
+                $(".wrap_search .btn_close").click(function(){
+                    $("html").removeClass("on_search");
+                })
+
+            }
+            ,
+            "basic" : function(){
+                /* 리스트 날짜표기 변경 */
+                $(".data_append").each(function(){
+                    var num_time = $(this).text().split(" ");
+                    num_time = num_time[0].replaceAll("/",".");
+                    $(this).text(num_time);
+                })
+
+                /* 브라우저 창 조절시 동영상 크기 조절. */
+                $(window).resize(blog.util.resizeMovie);
+
+            }
+        }
+        blog.init();
+    })
+
+</script>
+
+</body>
+</html>
