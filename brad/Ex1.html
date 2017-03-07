@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+        #target{
+            background-color: yellow;
+            width: 100px;
+            height: 100px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="target"></div>
+    <button id="OnBtn">On</button>
+    <button id="OffBtn">Off</button>
+    <button id="toggle">토글</button>
+</body>
+<script>
+
+    var target = document.getElementById('target');
+    var on = document.getElementById('OnBtn');
+    var off = document.getElementById('OffBtn');
+    var toggle = document.getElementById('toggle');
+
+
+    on.addEventListener('click',function(e){
+        target.style.backgroundColor = "red";
+    });
+
+    off.addEventListener('click', function(e){
+        target.style.backgroundColor = "yellow";
+    });
+
+    toggle.addEventListener('click', function(e){
+        var color = target.style.backgroundColor;
+        if(color === "yellow"){
+            target.style.backgroundColor = "red";
+        }
+        else{
+            target.style.backgroundColor = "yellow";
+        }
+    });
+
+</script>
+</html>
