@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>토글 스위치 만들기</title>
 </head>
 <style>
     #lightBulb {
@@ -28,6 +28,10 @@
         height: 150px;
         margin: auto;
     }
+    .on#lightBulb{
+        background-color: yellow;
+    }
+
 </style>
 <body>
 <div class="wrapper">
@@ -38,13 +42,13 @@
 <script>
     (function () {
         var btn = document.getElementById("btn");
-        var lightBulb = document.getElementById("lightBulb").style;
+        var lightBulb = document.getElementById("lightBulb");
 
         btn.addEventListener("click", function () {
-            if(lightBulb.backgroundColor == "aliceblue"){
-                lightBulb.backgroundColor = "yellow";
+            if(lightBulb.className == "on"){
+                lightBulb.className = "";
             }else{
-                lightBulb.backgroundColor = "aliceblue";
+                lightBulb.className = "on";
             }
         });
     })();
