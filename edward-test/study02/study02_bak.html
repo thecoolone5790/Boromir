@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style type="text/css">
+    	/*******************************************CSS RESET*******************************************/
+    	html, body, div, span, object, iframe,
+    	h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    	abbr, address, cite, code,
+    	del, dfn, em, img, ins, kbd, q, samp,
+    	small, strong, sub, sup, var,
+    	b, i,
+    	dl, dt, dd, ol, ul, li,
+    	fieldset, form, label, legend,
+    	table, caption, tbody, tfoot, thead, tr, th, td,
+    	article, aside, canvas, details, figcaption, figure,
+    	footer, header, hgroup, menu, nav, section, summary,
+    	time, mark, audio, video {
+    	    margin: 0;
+    	    padding: 0;
+    	    border: 0;
+    	    outline: 0;
+    	    font-size: 100%;
+    	    vertical-align: baseline;
+    	    background: transparent;
+    	}
+
+    	body {
+    	    line-height: 1;
+    	}
+
+    	article, aside, details, figcaption, figure,
+    	footer, header, hgroup, menu, nav, section {
+    	    display: block;
+    	}
+
+    	nav ul {
+    	    list-style: none;
+    	}
+
+    	blockquote, q {
+    	    quotes: none;
+    	}
+
+    	blockquote:before, blockquote:after,
+    	q:before, q:after {
+    	    content: '';
+    	    content: none;
+    	}
+
+    	a {
+    	    margin: 0;
+    	    padding: 0;
+    	    font-size: 100%;
+    	    vertical-align: baseline;
+    	    background: transparent;
+    	}
+
+    	/* change colours to suit your needs */
+    	ins {
+    	    background-color: #ff9;
+    	    color: #000;
+    	    text-decoration: none;
+    	}
+
+    	/* change colours to suit your needs */
+    	mark {
+    	    background-color: #ff9;
+    	    color: #000;
+    	    font-style: italic;
+    	    font-weight: bold;
+    	}
+
+    	del {
+    	    text-decoration: line-through;
+    	}
+
+    	abbr[title], dfn[title] {
+    	    border-bottom: 1px dotted;
+    	    cursor: help;
+    	}
+
+    	table {
+    	    border-collapse: collapse;
+    	    border-spacing: 0;
+    	}
+
+    	/* change border colour to suit your needs */
+    	hr {
+    	    display: block;
+    	    height: 1px;
+    	    border: 0;
+    	    border-top: 1px solid #000000;
+    	    margin: 1em 0;
+    	    padding: 0;
+    	}
+
+    	input, select {
+    	    vertical-align: middle;
+    	}
+
+    	/*******************************************CSS RESET*******************************************/
+
+    	#cal {
+    	    width: 300px;
+    	    height: 500px;
+    	    background-color: #ffff99;
+    	    margin: auto;
+    	    margin-top: 100px;
+    	}
+
+    	#result {
+    	    width: 300px;
+    	    height: 100px;
+    	    padding-top: 5px;
+    	    background-color: gray;
+    	}
+    	#result >div{
+    	    width: 290px;
+    	    height: 55px;
+    	    font-size: x-large;
+    	    margin-left: 5px;
+    	    color: greenyellow;
+    	    background-color: black;
+    	    text-align: center;
+    	    padding-top: 40px;
+    	}
+
+    	#numbers {
+    	    width: 300px;
+    	    height: 300px;
+    	    /*background-color: blueviolet;*/
+    	}
+
+    	#numbers > div {
+    	    width: 100px;
+    	    height: 100px;
+    	    /*background-color: black;*/
+    	    float: left;
+    	}
+
+    	#numbers div > button {
+    		border:1px solid #ddd;
+    	    width: 98px;
+    	    height: 98px;
+    	    background-color: white;
+    	    color: black;
+    	    font-size: larger;
+
+    	}
+
+    	#cal_type {
+    	    width: 300px;
+    	    height: 100px;
+    	    background-color: rosybrown;
+    	}
+
+    	#cal_type > div {
+    	    width: 50px;
+    	    height: 100px;
+    	    background-color: black;
+    	    float: left;
+    	}
+
+    	#cal_type div > button {
+    	    width: 48px;
+    	    height: 98px;
+    	    font-size: larger;
+    	}
+    	#plus{
+    	    background-color: gold;
+    	    color: black;
+    	}
+    	#minus{
+    	    background-color: gold;
+    	    color: black;
+    	}
+    	#divide{
+    	    background-color: orange;
+    	    color: black;
+    	}
+    	#multiple{
+    	    background-color: orange;
+    	    color: black;
+    	}
+
+    	#equal{
+    	    background-color: orangered;
+    	    color: white;
+    	}
+    	#clear{
+    	    background-color: gray;
+    	    color: white;
+    	}
+
+
+    </style>
+</head>
+	
+<body>
+<div id="cal">
+    <div id="result">
+        <div id="resultValue">C : clear , = : equal</div>
+    </div>
+    <div id="numbers">
+        <div>
+            <button onclick="getNumber('1')">1</button>
+        </div>
+        <div>
+            <button onclick="getNumber('2')">2</button>
+        </div>
+        <div>
+            <button onclick="getNumber('3')">3</button>
+        </div>
+        <div>
+            <button onclick="getNumber('4')">4</button>
+        </div>
+        <div>
+            <button onclick="getNumber('5')">5</button>
+        </div>
+        <div>
+            <button onclick="getNumber('6')">6</button>
+        </div>
+        <div>
+            <button onclick="getNumber('7')">7</button>
+        </div>
+        <div>
+            <button onclick="getNumber('8')">8</button>
+        </div>
+        <div>
+            <button onclick="getNumber('9')">9</button>
+        </div>
+    </div>
+    <div id="cal_type">
+        <div>
+            <button id="clear">C</button>
+        </div>
+        <div>
+            <button onclick="getCalType('+')" id="plus">+</button>
+        </div>
+        <div>
+            <button onclick="getCalType('-')" id="minus">-</button>
+        </div>
+        <div>
+            <button onclick="getCalType('/')" id="divide">/</button>
+        </div>
+        <div>
+            <button onclick="getCalType('*')" id="multiple">*</button>
+        </div>
+        <div>
+            <button onclick="getResult()" id="equal">=</button>
+        </div>
+    </div>
+</div>
+<script>
+    var readyList = [];
+    var tmpNumberList = '';
+    var tmpResult = '';
+    var prev = 0;
+    var result = document.getElementById("resultValue");
+    function writeResult() {
+        var resultString = '';
+        for (var i = 0; i < readyList.length; i++) {
+            resultString = resultString + readyList[i];
+        }
+        if (prev != 0) {
+            resultString = resultString + " = " + prev;
+        } else {
+            resultString = resultString + tmpNumberList;
+        }
+        result.innerHTML = resultString;
+    }
+    function getNumber(num) {
+        tmpNumberList = tmpNumberList + num;
+        writeResult();
+    }
+    function getCalType(calType) {
+        readyList.push(tmpNumberList);
+        tmpNumberList = '';
+        readyList.push(calType);
+        writeResult();
+    }
+    function getResult() {
+        readyList.push(tmpNumberList);
+        tmpNumberList = '';
+        prev = parseInt(readyList[0]);
+        for (var i = 0; i < readyList.length; i++) {
+            var target = readyList[i];
+            var next = parseInt(readyList[i + 1]);
+            if (i > 0 && i < readyList.length) {
+                if (target == '+') {
+                    tmpResult = prev + next;
+                    prev = tmpResult;
+                    writeResult();
+                } else if (target == '-') {
+                    tmpResult = prev - next;
+                    prev = tmpResult;
+                    writeResult();
+                } else if (target == '/') {
+                    tmpResult = prev / next;
+                    prev = tmpResult;
+                    writeResult();
+                } else if (target == '*') {
+                    tmpResult = prev * next;
+                    prev = tmpResult;
+                    writeResult();
+                }
+            }
+        }
+        readyList = [];
+    }
+</script>
+
+<script language="JavaScript">
+<!-- Hide all this from non javascript browsers
+
+
+
+NaN=0;	// if someone typed characters and not digits we assume the value 0
+
+var stack=0; // used to save the first value
+
+var op='+'; // used to save the operator
+
+var assume_equals=false;  // used to calculate sum when didn't click '='
+
+var nnum=true; // the first number is a new number
+
+
+
+function digitpress(val) { // pressed a digit
+
+  if (nnum==false) { // append digit to digits currently on the screen
+
+    document.calc.screen.value = document.calc.screen.value+val;
+
+  }
+
+  else { // starting a new number
+
+    stack = parseFloat(document.calc.screen.value);	// save prev number
+
+    document.calc.screen.value = val;	// show new digit
+
+    nnum=false;		// subsequent numbers get appended
+
+  }
+
+  return(true);
+
+}
+
+
+
+function pushop(s) { // pressed an operator (one of +, -, *, / or =)
+
+  if (s=='=' || assume_equals==true) { // we should update total on the screen
+
+    // grab the number on the screen now
+
+    v = parseFloat(document.calc.screen.value);
+
+    // catch division by zero
+
+    if (!(op == '/' && v == 0)) {
+
+      // work out the sum and put the result on the screen
+
+      document.calc.screen.value = eval((stack) + op + v);
+
+      if (s != '=') {	// save the operator and the current total
+
+	op = s;
+
+	stack = parseFloat(document.calc.screen.value);
+
+      }
+
+      else {
+
+	assume_equals = false; // this was an '=' so don't total on next op
+
+      }
+
+    }
+
+    else {	// division by zero so display error message
+
+      document.calc.screen.value = "Error";
+
+      assume_equals = false; // this was an error so don't total on next op
+
+    }
+
+    nnum = true;
+
+  }
+
+  else { // otherwise save the current value and the op
+
+    assume_equals = true; // give total on next op
+
+    stack = parseFloat(document.calc.screen.value);	// save current total
+
+    nnum=true;	// next number to be entered is a new one
+
+    op=s;	// remember the operator just typed
+
+  }
+
+  return(true);
+
+}
+
+
+
+// End of all the hidden stuff -->
+
+</script>
+</body>
+</html>

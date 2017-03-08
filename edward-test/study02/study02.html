@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>계산기</title>
+    <style>
+    	body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,textarea,p,blockquote,th,td,input,select,button{margin:0;padding:0}
+    	fieldset,img{border:0 none}
+    	dl,ul,ol,menu,li{list-style:none}
+    	blockquote, q{quotes: none}
+    	blockquote:before, blockquote:after,q:before, q:after{content:'';content:none}
+    	input,select,textarea,button{vertical-align:middle}
+    	input::-ms-clear{display:none}
+    	button{border:0 none;background-color:transparent;cursor:pointer}
+    	body{background:#fff}
+    	body,th,td,input,select,textarea,button{font-size:12px;line-height:1.5;font-family:'돋움',dotum,sans-serif;color:#333} /* color값은 디자인가이드에 맞게사용 */
+    	a{color:#333;text-decoration:none}
+    	a:active, a:hover{text-decoration:underline}
+    	a:active{background-color:transparent}
+    	address,caption,cite,code,dfn,em,var{font-style:normal;font-weight:normal}
+
+		
+    	.screen_out{overflow:hidden;position:absolute;width:0;height:0;line-height:0;text-indent:-9999px}
+    	#Container{position:relative;width:500px;height:500px;margin:0 auto}
+		#calculatingBox{position:relative;width:400px;margin:50px auto;border:2px solid #999}
+		#calculatingBox .calculating_head{padding:20px;background-color:#f7f7f7}
+		#calculatingBox .calculating_head .num_result{display:block;width:100%;padding:5px;border:1px solid #75c32f;font-size:15px;background-color:#f2ffe6;box-sizing:border-box}
+		#calculatingBox .calculating_cont{padding:20px 0;border-top:1px solid #999;background-color:#fdfff9}
+		#calculatingBox .list_calculating{padding:0 1%}
+		#calculatingBox .list_calculating:after{display:block;width:0;height:0;clear:both;content:''}
+		#calculatingBox .list_calculating li{float:left;width:23%;margin:0 1% 5px}
+		#calculatingBox .list_calculating input{display:block;width:100%;padding:5px 0;border:1px solid #ddd;border-radius:5px;font-size:15px;background-color:#f7f7f7}
+		#calculatingBox .list_calculating input:active{background-color:#71b800;color:#fff}
+    </style>
+</head>
+<body>
+	<div id="Container">
+		<div id="calculatingBox">
+			<div id="calculatingResult" class="calculating_head">
+				<input type="text" id="numValue" value="" class="num_result">
+				<label for="numValue" class="screen_out">계산기 결과값</label>
+			</div>
+			<div id="calculatingBtn" class="calculating_cont">
+				<ul class="list_calculating">
+					<li>
+						<input type="button" id="num1" value="1">
+						<label for="num1" class="screen_out">숫자1</label>
+					</li>
+					<li>
+						<input type="button" id="num2" value="2">
+						<label for="num2" class="screen_out">숫자2</label>
+					</li>
+					<li>
+						<input type="button" id="num3" value="3">
+						<label for="num3" class="screen_out">숫자3</label>
+					</li>
+					<li>
+						<input type="button" id="plus" value="+" class="btn_calculate">
+						<label for="plus" class="screen_out">더하기</label>
+					</li>
+					<li>
+						<input type="button" id="num4" value="4">
+						<label for="num4" class="screen_out">숫자4</label>
+					</li>
+					<li>
+						<input type="button" id="num5" value="5">
+						<label for="num5" class="screen_out">숫자5</label>
+					</li>
+					<li>
+						<input type="button" id="num6" value="6">
+						<label for="num6" class="screen_out">숫자6</label>
+					</li>
+					<li>
+						<input type="button" id="minus" value="-" class="btn_calculate">
+						<label for="minus" class="screen_out">빼기</label>
+					</li>
+					<li>
+						<input type="button" id="num7" value="7">
+						<label for="num7" class="screen_out">숫자7</label>
+					</li>
+					<li>
+						<input type="button" id="num8" value="8">
+						<label for="num8" class="screen_out">숫자8</label>
+					</li>
+					<li>
+						<input type="button" id="num9" value="9">
+						<label for="num9" class="screen_out">숫자9</label>
+					</li>
+					<li>
+						<input type="button" id="multiply" value="*" class="btn_calculate">
+						<label for="multiply" class="screen_out">곱하기</label>
+					</li>
+					<li>
+						<input type="button" id="num0" value="0">
+						<label for="num0" class="screen_out">숫자0</label>
+					</li>
+					<li>
+						<input type="button" id="division" value="/" class="btn_calculate">
+						<label for="division" class="screen_out">나누기</label>
+					</li>
+					<li>
+						<input type="button" id="delete" value="C" class="btn_delete">
+						<label for="delete" class="screen_out">모두지우기</label>
+					</li>
+					<li>
+						<input type="button" id="result" value="=" class="btn_result">
+						<label for="result" class="screen_out">결과</label>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+	
+	<script>
+		// (function(){
+		// 	// var Container = document.getElementById('Container');
+		// 	var calculatingBox = document.getElementById('calculatingBox');
+		// 	var calculatingResult = calculatingBox.getElementsByClassName('num_result')[0];
+		// 	var btnBox = document.getElementById('calculatingBtn');
+		// 	var btnDel = btnBox.getElementsByClassName('btn_delete')[0];
+		// 	var btnResult = btnBox.getElementsByClassName('btn_result')[0];
+		// 	var btnNum = btnBox.getElementsByTagName('input');
+		// 	// console.log(btnNum.length);
+			
+		// 	calculatingResult.readOnly = true;
+			
+		// 	var booNum = true;
+		// 	var firstStr = '';
+		// 	var lastStr = '';
+		// 	var calStr = '';
+		// 	var resultStr = '';
+			
+			
+
+		// 	/* input 버튼 배열 */
+		// 	var btnArr = [];
+		// 	for(var i = 0; i < btnNum.length; i++){
+		// 		btnArr.push(btnNum[i]);
+		// 		btnArr[i].addEventListener('click', numCheck);
+		// 	}
+
+		// 	/* 버튼 눌렀을 경우 */
+
+		// 	function numCheck(){
+		// 		var valueNum = this.value;
+
+		// 		if(this.className === 'btn_calculate'){
+					
+		// 			// calStr = firstStr += valueNum; 
+		// 			booNum = false;
+		// 			calStr = valueNum;
+		// 			resultStr = resultStr + calStr;
+		// 			calculatingResult.value = resultStr;
+
+
+		// 		}else if(this.className === 'btn_delete'){
+		// 			resultStr = '';
+		// 			numDel();
+		// 		}else if(this.className === 'btn_result'){
+		// 			numResult();
+				
+		// 		}else{
+		// 			if(booNum === true){
+		// 				firstStr += valueNum;
+		// 				resultStr = firstStr;
+						
+		// 			}else{
+		// 				lastStr += valueNum;
+		// 				console.log(lastStr.length);
+		// 				resultStr = resultStr + lastStr;
+		// 			}
+
+		// 			calculatingResult.value = resultStr;
+		// 			console.log(resultStr);
+		// 		}	
+		// 	}
+			
+
+		// 	function numDel(){
+		// 		calculatingResult.value = '';
+		// 	}
+
+		// 	function numResult(){
+		// 		firstNum = parseInt(firstStr);
+		// 		console.log(firstNum);
+
+		// 	}
+
+			
+		// })(window);
+
+
+
+
+		(function(){
+			// var Container = document.getElementById('Container');
+			var calculatingBox = document.getElementById('calculatingBox');
+			var calculatingResult = calculatingBox.getElementsByClassName('num_result')[0];
+			var btnBox = document.getElementById('calculatingBtn');
+			var btnDel = btnBox.getElementsByClassName('btn_delete')[0];
+			var btnResult = btnBox.getElementsByClassName('btn_result')[0];
+			var btnNum = btnBox.getElementsByTagName('input');
+			// console.log(btnNum.length);
+			
+			calculatingResult.readOnly = true;
+			var doubleNo = true;
+			var calculateNo = false;
+
+			var calculateArr = [];  //입력되는 배열
+			var num = '';  // 숫자
+			var firstNum = 0;
+			
+
+			/* input 버튼 배열 */
+			var btnArr = [];
+			for(var i = 0; i < btnNum.length; i++){
+				btnArr.push(btnNum[i]);
+				btnArr[i].addEventListener('click', numCheck);
+			}
+
+			/* 버튼 눌렀을 경우 */
+
+			function numCheck(){
+				var valueNum = this.value;
+
+				if(this.className === 'btn_calculate'){
+					if(calculateNo === true){
+						if(doubleNo === true){
+							calculateArr.push(num);
+							num = '';
+							calculateArr.push(valueNum);
+							// console.log(calculateArr);
+							resultTop();	
+						}else{
+							alert('C를 누리신 후 다시 입력하세요');
+						}
+					}else{
+						alert('숫자를 입력하세요!');
+					}
+
+				}else if(this.className === 'btn_delete'){
+					numDel();
+					num = '';
+					calculateArr = [];
+					firstNum = 0;
+					doubleNo = true;
+					calculateNo = false;
+
+				}else if(this.className === 'btn_result'){
+					if(calculateNo === true){
+						numResult();
+					}else{
+						alert('입력오류!');
+					}
+				
+				}else{
+					if(doubleNo === true){
+						numDel();
+						num = num + valueNum;
+						// console.log(num);
+						resultTop();
+						calculateNo = true;
+					}else{
+						alert('C를 누리신 후 다시 입력하세요');
+					}
+					
+				}	
+			}
+
+			function resultTop(){
+				var resultAnswer = '';
+				for(var i = 0; i < calculateArr.length; i++){
+					resultAnswer = resultAnswer + calculateArr[i];
+				}
+
+				// console.log(resultAnswer);
+				if(firstNum == 0){
+					resultAnswer = resultAnswer + num;
+				}else{
+					resultAnswer = firstNum;
+				}
+				calculatingResult.value = resultAnswer;
+				
+			}
+
+			/* 클릭 이벤트 */
+			// btnDel.addEventListener('click', numDel);
+			// btnResult.addEventListener('click', numResult);
+			
+
+			function numDel(){
+				calculatingResult.value = '';
+			}
+
+			function numResult(){
+				if(calculateNo === true){
+					calculateArr.push(num);
+					num = '';
+					// console.log(calculateArr);
+					firstNum = parseFloat(calculateArr[0]);
+					console.log(firstNum);
+					for(var i=0; i < calculateArr.length; i++){
+						var target = calculateArr[i];
+						var lastNum = parseFloat(calculateArr[i + 1]);
+						if(i > 0 && i < calculateArr.length){
+							if(target == '+'){
+								resultNum = firstNum + lastNum;
+								firstNum = resultNum;
+								console.log(resultNum);
+								resultTop();
+								doubleNo = false;
+							}else if(target == '-'){
+								resultNum = firstNum - lastNum;
+								firstNum = resultNum;
+								console.log(resultNum);
+								resultTop();
+								doubleNo = false;
+							}else if(target == '*'){
+								resultNum = firstNum * lastNum;
+								firstNum = resultNum;
+								console.log(resultNum);
+								resultTop();
+								doubleNo = false;
+							}else if(target == '/'){
+								resultNum = firstNum / lastNum;
+								firstNum = resultNum;
+								console.log(resultNum);
+								resultTop();
+								doubleNo = false;
+							}
+
+						}
+						calculateNo = false;
+					}
+					num = '';
+					calculateArr = [];
+					// calculateNo = false;
+				}else{
+					alert('숫자를 누르세요!');
+				}
+				
+				
+			}
+
+			
+		})(window);
+	</script>
+
+</body>
+</html>

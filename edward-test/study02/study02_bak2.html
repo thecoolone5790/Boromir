@@ -1,0 +1,181 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<style type="text/css">
+    .txtalign {
+        text-align: right;
+    }
+
+</style>
+
+<script type="text/javascript">
+var str = "";
+var str2 = "";
+var flag = false;
+
+function cal(num)
+{
+    //입력된 값이 숫자면 true 문자면 false
+    if (!isNaN(num))
+
+    {
+
+        if (!flag)
+        {
+        	console.log('aaa');
+            str = "";
+            document.getElementById('txt').innerHTML = '';
+            //innerhtml 태그 - 지정된 태그의 값을 바꿔준다!
+        }
+
+        str += num;
+        str2 += num;
+        // 위 아래텍스트 창에 동시에넣어주고
+        // 아래창만 출력한다
+        document.getElementById('txt').innerHTML += num;
+        flag = true;
+    }
+    //이전에 입력값이 숫자였으면
+    else if (flag)
+    {
+
+        str2 += num;
+        //기존에 입력된 숫자와 연산자를 위 텍스트창에 출력한다
+        document.getElementById('txtcalc').innerHTML = str2;
+        if (!isNaN(num))
+        {
+            str2.substring(0, str.length - 1);
+            str2 += num;
+
+
+            document.getElementById('txtcalc').innerHTML = str2;
+        }
+        flag = false;
+        console.log(str2);
+    }
+}
+
+function answer()
+{
+    //수식이 연산자로 끝나면
+    if (!flag)
+    {
+        alert('수식을 다시 입력해주세요!');
+        return;
+    }
+    else
+    {
+        document.getElementById('txtcalc').innerHTML = str2;
+        document.getElementById('txt').innerHTML = eval(str2);
+        // document.getElementById('txt').innerHTML = new Function('return' + str2)();
+        // 위 텍스트창에 연산한 결과값을 eval()함수로 계산 하고아래 텍스창  결과 출력
+        document.getElementById('txtcalc').innerHTML = "";
+        // 위 창에 내용을초기
+
+        str2 = document.getElementById('txt').innerHTML;
+        // alert(str2);
+    }
+}
+
+function enter(number)
+{
+    if (event.keyCode == 13)
+    {
+        answer();
+
+    }
+    else if ((event.keyCode >= 96 && event.keyCode <= 105))
+    {
+        cal(event.keyCode - 96);
+    }
+
+    else if (flag && ( event.keyCode == 107 || event.keyCode == 109 ||
+                       event.keyCode == 106 || event.keyCode == 111 ||
+                       event.keyCode == 110))
+    {
+        switch (event.keyCode) {
+
+            case 107:cal('+');break;
+            case 109:cal('-');break;
+            case 106:cal('*');break;
+            case 111:cal('/');break;
+        }
+    }
+    //        else
+    //        {
+    //            alert('숫자 또는 연산자를 입력하세요!');
+    //        }
+}
+
+function clearcal()
+{
+    str2 = "";
+    flag = false;
+    document.getElementById('txt').innerHTML = "수식을 입력하세요..";
+    document.getElementById('txtcalc').innerHTML = "";
+    // 텍스트창 초기화
+}
+
+function bs()
+{
+    document.getElementById('txt').innerHTML = str.substring(0, str.length - 1);
+    str2 = str2.substring(0, str2.length - 1);
+    document.getElementById('txtcalc').innerHTML = str2;
+    if (str.length == 0)
+        str = '0';
+    // substring 으로 0부터 value 길이에서 -1 한 만큼의 길이를 출력한다
+}
+
+</script>
+<title>계산기</title>
+</head>
+<body onkeydown="enter(cal);">
+<form name="calc">
+    <table border=1 width=200px height=200px cellpadding=0 cellspacing=0 align=center>
+
+        <tr border=2>  <!-- 연산자 표시창  -->
+            <td colspan=5 align=center height=20>
+                <div id='txtcalc' name='txtcalc' class="txtalign" value=''></div>
+                <div id='txt' name='txt' class="txtalign" value=''>수식을 입력하세요..</div>
+            </td>
+        </tr>
+
+        <tr height=40px> <!-- 백스페이스, C -->
+            <td colspan=5>
+                <table border=1 width=100%>
+                    <tr align=center>
+                        <td width=33%><input type=button value='BackSpace' style="width:100%;" onclick=bs()></td>
+                        <td width=33%><input type=button value='C' style="width:100%;" onclick=clearcal()></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr align=center>
+            <td width=25%><input type=button value='  1  ' onclick="cal('1')"></td>
+            <td width=25%><input type=button value='  2  ' onclick="cal('2')"></td>
+            <td width=25%><input type=button value='  3  ' onclick="cal('3')"></td>
+            <td width=25%><input type=button value='  /  ' onclick="cal('/')"></td>
+        </tr>
+        <tr align=center>
+            <td><input type=button value='  4  ' onclick="cal('4')"></td>
+            <td><input type=button value='  5  ' onclick="cal('5')"></td>
+            <td><input type=button value='  6  ' onclick="cal('6')"></td>
+            <td><input type=button value='  *  ' onclick="cal('*')"></td>
+        </tr>
+        <tr align=center>
+            <td><input type=button value='  7  ' onclick="cal('7')"></td>
+            <td><input type=button value='  8  ' onclick="cal('8')"></td>
+            <td><input type=button value='  9  ' onclick="cal('9')"></td>
+            <td><input type=button value='  +  ' onclick="cal('+')"></td>
+        </tr>
+        <tr align=center>
+            <td><input type=button value='  =  ' onclick="answer()"></td>
+            <td><input type=button value='  0  ' onclick="cal('0')"></td>
+            <td><input type=button value='  .  ' onclick="cal('.')"></td>
+            <td><input type=button value='  -  ' onclick="cal('-')"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+
