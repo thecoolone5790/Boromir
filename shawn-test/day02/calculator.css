@@ -95,82 +95,38 @@ input, select {
 }
 
 /*******************************************CSS RESET*******************************************/
-
-#cal {
-    width: 300px;
-    height: 500px;
-    background-color: #ffff99;
+.wrapper{
+    position: relative;
+    background-color: #2d2d2d;
+    width: 416px;
+    height: 100%;
     margin: auto;
-    margin-top: 100px;
+    overflow: hidden;
+    border-radius: 3%;
 }
-
-#result {
-    width: 300px;
+#result{
+    width: 416px;
     height: 100px;
-    padding-top: 5px;
-    background-color: gray;
+    background-color: #2d2d2d;
+
 }
-#result >div{
-    width: 290px;
-    height: 55px;
+#target{
     font-size: x-large;
-    margin-left: 5px;
-    color: greenyellow;
-    background-color: black;
+    color: white;
     text-align: center;
-    padding-top: 40px;
+    margin-top: 50px;
 }
 
-#numbers {
-    width: 300px;
-    height: 300px;
-    background-color: blueviolet;
-}
-
-#numbers > div {
+.wrapper div button{
     width: 100px;
     height: 100px;
-    background-color: black;
-    float: left;
+    margin-bottom: 4px;
+    font-size: x-large;
+    color: black;
 }
-
-#numbers div > button {
-    width: 98px;
-    height: 98px;
+.cal{
+    background-color: #ff7b00;
+}
+.btn .num{
     background-color: white;
-    color: black;
-    font-size: larger;
-
 }
-
-#cal_type {
-    width: 300px;
-    height: 100px;
-    background-color: rosybrown;
-}
-
-#cal_type > div {
-    width: 100px;
-    height: 100px;
-    background-color: black;
-    float: left;
-}
-
-#cal_type div > button {
-    width: 98px;
-    height: 98px;
-    font-size: larger;
-}
-
-
-#equal{
-    background-color: gold;
-    color: black;
-}
-#clear{
-    background-color: gold;
-    color: black;
-}
-
-
-

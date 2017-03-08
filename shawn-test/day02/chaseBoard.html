@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2중 배열로 채스판 만들기</title>
+</head>
+<style>
+    td{
+        width: 100px;
+        height: 100px;
+    }
+    .white {
+        background-color: rgba(148, 118, 71, 0.11);
+
+    }
+
+    .black {
+        background-color: rgb(65, 49, 16);
+    }
+</style>
+<body>
+<table id="target"></table>
+<script>
+    var horizontal = prompt('가로칸 수를 입력해주 세요(정수만 입력해 주세요)', '0');
+    var vertical = prompt('세로칸 수를 입력해주 세요(정수만 입력해 주세요)', '0');
+    var target = document.getElementById("target");
+    for (var i = 1; i <= horizontal; i++) {
+        var tr = document.createElement('tr');
+        for (var j = 1; j <= vertical; j++) {
+            var td = document.createElement('td');
+            if (i % 2 == j % 2) {
+                td.className = "white";
+            } else {
+                td.className = "black";
+            }
+            tr.appendChild(td);
+        }
+        target.appendChild(tr);
+    }
+</script>
+</body>
+</html>
