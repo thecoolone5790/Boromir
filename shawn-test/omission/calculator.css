@@ -150,41 +150,26 @@ input, select {
 }
 
 #cal_type > div {
-    width: 50px;
+    width: 100px;
     height: 100px;
     background-color: black;
     float: left;
 }
 
 #cal_type div > button {
-    width: 48px;
+    width: 98px;
     height: 98px;
     font-size: larger;
 }
-#plus{
-    background-color: gold;
-    color: black;
-}
-#minus{
-    background-color: gold;
-    color: black;
-}
-#divide{
-    background-color: orange;
-    color: black;
-}
-#multiple{
-    background-color: orange;
-    color: black;
-}
+
 
 #equal{
-    background-color: orangered;
-    color: white;
+    background-color: gold;
+    color: black;
 }
 #clear{
-    background-color: gray;
-    color: white;
+    background-color: gold;
+    color: black;
 }
 
 
