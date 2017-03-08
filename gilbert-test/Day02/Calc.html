@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Calc</title>
+    <style>
+        button{
+            width: 100%;
+            height: 70px;
+        }
+        table{
+            border: 1px solid #000000;
+            width:400px;
+            height:300px;
+            color: #0fff10;
+        }
+        .showView{
+            height: 50px;
+            background: #000000;
+            font-size:40px;
+            text-align: right;
+            padding-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>계산기</h1>
+        <table  id="calc">
+            <tr>
+                <td colspan="4" class="showView" id="showView"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button value="C">C</button></td>
+                <td><button value="%">%</button></td>
+                <td><button value="/">/</button></td>
+            </tr>
+            <tr>
+                <td><button value="7" >7</button></td>
+                <td><button value="8" >8</button></td>
+                <td><button value="9" >9</button></td>
+                <td><button value="*">*</button></td>
+            </tr>
+            <tr>
+                <td><button value="4">4</button></td>
+                <td><button value="5">5</button></td>
+                <td><button value="6">6</button></td>
+                <td><button value="-">-</button></td>
+            </tr>
+            <tr>
+                <td><button value="1">1</button></td>
+                <td><button value="2">2</button></td>
+                <td><button value="3">3</button></td>
+                <td><button value="+">+</button></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button value="0">0</button></td>
+                <td><button value=".">.</button></td>
+                <td><button value="=">=</button></td>
+            </tr>
+        </table>
+</body>
+<script>
+    var Calc = (function Calc(){
+        this.showView = document.getElementById('showView');   // 뷰
+        this.result = 0;    //결과
+        this.firstNum = 0;    //첫번째값
+        this.secondNum = 0;    //두번째값
+        this.str = '';  //보여지는 값
+
+        var init = function(){  // 시작
+            action();
+            display();
+        };
+        var add = function(){    //더하기
+            firstNum = parseFloat(firstNum) + parseFloat(secondNum);
+            nextCal();
+            display();
+        };
+        var sub = function(num){    //빼기
+            firstNum = parseFloat(firstNum) - parseFloat(secondNum);
+            nextCal();
+            display();
+        };
+        var div = function(num){    //나누기
+            firstNum = parseFloat(firstNum) / parseFloat(secondNum);
+            nextCal();
+            display();
+        };
+        var rem = function(num){    //나머지
+            firstNum = parseFloat(firstNum) % parseFloat(secondNum);
+            nextCal()
+            display();
+        };
+        var mul = function(num){    //곱하기
+            firstNum = parseFloat(firstNum) * parseFloat(secondNum);
+            nextCal();
+            display();
+        };
+        var getResult = function(){     //결과연산
+            var reg = str.match(/[+\-*/%]/);    //정규표현식으로 연산판단
+            var resultArr = str.split(reg);
+            if(firstNum == 0){          //첫번째 두번째 숫자
+                firstNum = resultArr[0];
+                secondNum = resultArr[1];
+            }else{
+                secondNum = resultArr[1];
+            }
+            switch (reg[0]){    //연산자에 따른 연산
+                case "+" : add(); break;
+                case "-" : sub(); break;
+                case "*" : mul(); break;
+                case "/" : div(); break;
+                case "%" : rem(); break;
+                default : alert('잘못된 연산식입니다.');
+            }
+        };
+        var display = function(){       //결과창
+           showView.innerText = firstNum;
+        };
+        var nextCal = function(){   //다음연산이 필요한경우
+            str = firstNum;
+            secondNum = 0;
+        };
+        var reset = function(){ //리셋
+            firstNum = 0;
+            secondNum = 0;
+            str = '';
+            showView.innerText = firstNum;
+        };
+        var action = function(){    //이벤트
+            var btns = document.querySelectorAll('#calc button');   //모든 버튼을 가져온다.
+            [].forEach.call(btns, function(btn){    // 배열이아니기때문에 call을 통해 배열처럼 사용
+                btn.addEventListener('click' , function(e){
+                    switch (this.value){    // 눌린 버튼
+                        case '=' : getResult(); break;  //결과값
+                        case 'C': reset(); break;   //리셋
+                        default :   // = c 가아니면 string으로 다 더함
+                            str += this.value;
+                            showView.innerText = str;
+                    }
+                })
+            });
+        };
+        return {
+            init :init()
+        }
+    })();
+</script>
+</html>
