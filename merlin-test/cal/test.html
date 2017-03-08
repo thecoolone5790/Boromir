@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        const MAX = 100;
+        var stack = new Array();
+        var peak = -1;
+
+        function init_stack() {
+            peak = -1;
+        }
+
+function push(t) {
+    if (peak >= MAX - 1) {
+        alert('Stack overflow.');
+        exit(1);
+    }
+peak++;
+stack.push(t);
+return t;
+}
+
+function pop() {
+if (peak < 0) {
+alert('Stack underflow.');
+exit(1);
+}
+peak--;
+return stack.pop();
+}
+
+function get_stack_peak() {
+return (peak < 0) ? -1 : stack[peak];
+}
+
+function is_stack_empty() {
+return (peak < 0);
+}
+
+function is_operator(k) {
+return k.match(/[+\-*/]/);
+}
+
+// 식이 올바른지 체크
+function is_legal(s) {
+var f = 0;
+var i = 0;
+var len = s.length;
+
+while (i < len-1) { // 마지막에 공백이 오는경우 i 와 len 이 같아지는것 방지하기 위해 len - 1 을 함
+while (s[i] == ' ' ) i++;
+
+if (is_operator(s[i])) { // 연산자이면
+f--;
+} else {	// 피연산자이면
+f++;
+}
+if (f < 1) break;
+i++;
+}
+return (f == 1);
+}
+
+// 연산자 우선순위
+function precedence(op) {
+if (op == '(') return 0;
+if (op == '+' || op == '-') return 1;
+if (op == '*' || op == '/') return 2;
+else return 3;
+}
+
+
+/* 후위표기법
+1. '('문자는 무시하고 넘어간다
+2. ')'를 만나면 스택에서 '('까지 팝하여 출력하고 '('는 팝하여 버린다.
+3. 연산자를 만나면 스택에서 그 연산자보다 낮은 우선순위의 연산자를 만날 때까지 팝하여 출력한 뒤에 자신을 푸시한다.
+4. 피연산자는 그냥 출력한다.
+*/
+function postfix(src) {
+var dst = new Array(),
+i = 0, // src 시작 인덱스
+j = 0, // dst 시작 인덱스
+len = src.length;
+
+init_stack();
+
+while (i < len) {
+
+if (src[i] == '(') {		// '('문자는 무시하고 넘어간다
+push(src[i++]);
+} else if (src[i] == ')') { //  ')'를 만나면 스택에서 '('까지 팝하여 출력하고 '('는 팝하여  버린다.
+while (get_stack_peak() != '(') {
+dst[j++] = pop();
+dst[j++] = ' ';	// 항목간 구분을 위해 공백삽입
+}
+pop();
+i++;
+} else if (is_operator(src[i])) { // 연산자일때
+// 우선 순위가 높은 연산자를을 모두 팝
+while (!is_stack_empty() && precedence(get_stack_peak()) >= precedence(src[i])) {
+dst[j++] = pop();
+dst[j++] = ' ';
+}
+push(src[i++]); // 연산자 푸시
+} else if (src[i] >= '0' && src[i] <= '9') { // 숫자일때
+    do {
+        dst[j++] = src[i++];
+
+    } while (src[i] >= '0' && src[i] <= '9');
+    dst[j++] = ' ';
+} else
+i++;
+}
+
+while (!is_stack_empty()) { // 스택에 남은 거 푸시한다.
+dst[j++] =  pop();
+dst[j++] =  ' ';
+}
+return dst;
+}
+
+function calc(p) {
+var i = 0; // p 배열 시작 인덱스
+var len = p.length;
+
+init_stack();
+while (i < len - 1) {
+
+if (p[i] >= '0' && p[i] <= '9') { // 숫자이면
+var j = 0;
+do {
+j = j * 10 + (p[i] - 0);
+i++;
+} while (p[i] >= '0' && p[i] <= '9');
+push(j);
+} else if (p[i] == '+') {
+push(pop() + pop());
+i++;
+} else if (p[i] == '*') {
+push(pop() * pop());
+i++;
+} else if (p[i] == '-') {
+j = pop();
+push(pop() - j);
+i++;
+} else if (p[i] == '/') {
+j = pop();
+push(pop() / j);
+i++;
+} else
+i++;
+}
+return pop();
+}
+
+function main() {
+    var input = document.getElementById('input').value,
+    arr = postfix(input),
+    val = '';
+//    console.log(arr);
+//
+//    console.log(stack);
+
+    for (var a in arr) {
+        val += arr[a];
+    }
+    console.log(val);
+if(is_legal(val) == false) {
+alert('잘못된 식입니다');
+} else {
+document.getElementById('result').value = calc(val);
+}
+}
+</script>
+입력 <input type="text" id="input" name="input"  value="(1*(2+6/3)+5)/2+7" /> =
+    결과 <input id="result" type="text" name="result" size="10" value="" />
+    <button onclick="main()">계산</button>
+        /* output
+         입력  = 결과 11.5 계산​
+         */
+</body>
+</html>
