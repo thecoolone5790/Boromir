@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="calculator.css">
 </head>
-<link rel="stylesheet" href="calculator.css">
 <body>
 <div class="wrapper">
     <div id="result">
@@ -39,10 +39,10 @@
     function getNumber(num) {
         if (calFlag == false) {
             preValue = preValue + num;
-            total = total + preValue;
+            total =  total + num;
         } else {
             nextValue = nextValue + num;
-            total = total + nextValue;
+            total = total + num;
 
         }
         target.innerHTML = total;

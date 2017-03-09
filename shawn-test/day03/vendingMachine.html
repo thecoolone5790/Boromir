@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자판기 만들기</title>
+    <link rel="stylesheet" href="vendingMachine.css">
+</head>
+<body>
+<div class="wrapper">
+    <div id="display_panel">
+    </div>
+    <div id="config">
+        <button class="configBtn" onclick="addGoods()"></button>
+    </div>
+</div>
+<script>
+    var config = document.getElementById('config');
+    var displayPanel = document.getElementById('display_panel');
+
+    function getGoods(elem, name, price) {
+        console.log('상품명 : ' + name + ' | 상품가격 :' + price);
+        console.log(elem);
+    }
+    function addGoods() {
+//        var name = prompt('사품명 : ', '음료');
+//        var price = prompt('상품가격 : ', '3000');
+        var name = '음료';
+        var price = 3000;
+        var btn = document.createElement('button');
+        btn.setAttribute('class', 'goods');
+        btn.innerHTML = '상품명 : ' + name + '\n' + '상품가격 :' + price;
+        btn.setAttribute('onclick', 'getGoods(' + 'this' + ',' + "'" + name + "'" + ',' + price + ')');
+
+        displayPanel.appendChild(btn);
+    }
+
+</script>
+</body>
+</html>
