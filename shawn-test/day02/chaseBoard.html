@@ -23,6 +23,9 @@
 <script>
     var horizontal = prompt('가로칸 수를 입력해주 세요(정수만 입력해 주세요)', '0');
     var vertical = prompt('세로칸 수를 입력해주 세요(정수만 입력해 주세요)', '0');
+//    var horizontal = 8;
+//    var vertical = 8;
+    var consoleType = '';
     var target = document.getElementById("target");
     for (var i = 1; i <= horizontal; i++) {
         var tr = document.createElement('tr');
@@ -30,13 +33,17 @@
             var td = document.createElement('td');
             if (i % 2 == j % 2) {
                 td.className = "white";
+                consoleType = consoleType + ' ';
             } else {
                 td.className = "black";
+                consoleType = consoleType + '#';
             }
             tr.appendChild(td);
         }
         target.appendChild(tr);
+        consoleType = consoleType + '\n';
     }
+    console.log(consoleType);
 </script>
 </body>
 </html>
