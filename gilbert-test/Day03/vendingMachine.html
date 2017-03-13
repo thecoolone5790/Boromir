@@ -137,7 +137,7 @@
                     <span>코카콜라</span>
                     <span id="price">2000원</span>
                 </div>
-                <button>선택</button>
+                <button id="seletor">선택</button>
             </li>
         </ul>
     </div>
@@ -189,12 +189,26 @@
           var currentMoney = getMoney();
           list.forEach(function(index){
             var itemPrice = index.querySelector('#price').innerText.replace(/[^0-9]/g,"");
-             if(currentMoney >= itemPrice){
+            var btn = index.querySelector('#seletor');
+
+             if(parseFloat(currentMoney) >= parseFloat(itemPrice)){
                  index.className = 'on';
+                 btn.addEventListener('click' , function(e){
+                   buyItem(itemPrice);
+                 })
              }else{
                  index.className = 'off';
              }
           });
+        };
+        var buyItem = function(price){
+            var currentMoney = getMoney();
+            if(parseFloat(currentMoney) >= parseFloat(price)){
+                console.log('구매가능');
+                currentMoney = parseFloat(currentMoney) - parseFloat(price);
+                changeMoeny(currentMoney);
+                checkBtn();
+            }
         };
         //잔액 반환
         var returnMoney = function(){
@@ -203,7 +217,7 @@
             returnBtn.addEventListener('click' , function(e){
                 var currentMoney = getMoney();
                 arr.forEach(function(idx){
-                    if((currentMoney/idx) > 1){
+                    if((currentMoney/idx) >= 1){
                         console.log(idx+'원 : ' + Math.floor(currentMoney/idx));
                         currentMoney%=idx;
                     }
