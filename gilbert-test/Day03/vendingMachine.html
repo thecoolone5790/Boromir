@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        .mainWrap{
+            background-color: #75c32f;
+            width: 400px;
+            height: 600px;
+            position: relative;
+        }
+        .itemWrap{
+            width: 400px;
+            height: 350px;
+            background-color: beige;
+            position: relative;
+        }
+        .itemWrap .item{
+            position: relative;
+            overflow: hidden;
+        }
+        .itemWrap .item .on button{
+            background-color: #f90006;
+        }
+        .itemWrap .item .off button{
+            background-color: #111d12;
+        }
+        .itemWrap .item li{
+            float: left;
+            background-color: #0dab6c;
+            width: 100px;
+            height: 175px;
+            font-size: 14px;
+        }
+        .itemWrap .item li img{
+            width: 100px;
+            height: 130px;
+        }
+        .itemWrap .item li .itemContent{
+            width: 100px;
+            height: 15px;
+        }
+        .itemWrap .item li button{
+            width: 100px;
+            height: 30px;
+        }
+        .contentWrap{
+            width: 400px;
+            height: 50px;
+            background-color: cornflowerblue;
+            position: relative;
+            overflow: hidden;
+        }
+        .contentWrap .leftContent{
+            width: 200px;
+            height: 50px;
+            position: absolute;
+            top : 20px;
+            left : 5px;
+        }
+        .contentWrap .rigthContent{
+            width: 200px;
+            height: 50px;
+            position: absolute;
+            top : 20px;
+            left : 300px;
+        }
+        .outputWrap{
+            width: 400px;
+            height: 200px;
+            background-color: #ffc0e3;
+            position: relative;
+        }
+        .outputWrap .output{
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            left: 100px;
+            top: 50px;
+            background-color: #2d2d2d;
+        }
+    </style>
+</head>
+
+<body>
+<div class="mainWrap">
+    <div class="itemWrap">
+        <ul class="item">
+            <li class="off">
+                <img src="http://timg.danawa.com/prod_img/500000/492/722/img/1722492_1.jpg">
+                <div class="itemContent">
+                    <span>코카콜라</span>
+                    <span id="price">2000원</span>
+                </div>
+                <button id="seletor">선택</button>
+            </li>
+        </ul>
+    </div>
+    <div class="contentWrap">
+        <div class="leftContent">
+            <span>잔액 :</span>
+            <span id="money">0</span>
+        </div>
+        <div class="rigthContent">
+            <button id="inputMoney">돈넣기</button>
+            <button id="returnMoney">반환</button>
+        </div>
+    </div>
+    <div class="outputWrap">
+        <div class="output">
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    (function vending(){
+        var init = function(){
+            input();
+            returnMoney();
+        };
+        //현재 잔액
+        var getMoney = function(){
+            var money = document.getElementById('money').innerText;
+            return money;
+        };
+        //돈넣는
+        var input = function(){
+            var inputBtn = document.getElementById('inputMoney');
+            inputBtn.addEventListener('click' , function(e){
+                var currentMoney = getMoney();
+                var inputMoney = prompt('현재잔액 : ' + currentMoney ,'투입하실 돈');
+                var total = parseFloat(currentMoney) + parseFloat(inputMoney);
+                changeMoeny(total)
+                checkBtn();
+            });
+        };
+        //잔액을 바꿔주는
+        var changeMoeny = function(money){
+           document.getElementById('money').innerText = money
+        };
+        //살수 있는 음료수 체크
+        var checkBtn = function(){
+          var list = document.querySelectorAll('.item li');
+          var currentMoney = getMoney();
+          list.forEach(function(index){
+            var itemPrice = index.querySelector('#price').innerText.replace(/[^0-9]/g,"");
+            var btn = index.querySelector('#seletor');
+
+             if(parseFloat(currentMoney) >= parseFloat(itemPrice)){
+                 index.className = 'on';
+                 btn.addEventListener('click' , function(e){
+                   buyItem(itemPrice);
+                 })
+             }else{
+                 index.className = 'off';
+             }
+          });
+        };
+        var buyItem = function(price){
+            var currentMoney = getMoney();
+            if(parseFloat(currentMoney) >= parseFloat(price)){
+                console.log('구매가능');
+                currentMoney = parseFloat(currentMoney) - parseFloat(price);
+                changeMoeny(currentMoney);
+                checkBtn();
+            }
+        };
+        //잔액 반환
+        var returnMoney = function(){
+            var returnBtn =  document.getElementById('returnMoney');
+            var arr = [50000,10000,5000,1000,500,100,10];
+            returnBtn.addEventListener('click' , function(e){
+                var currentMoney = getMoney();
+                arr.forEach(function(idx){
+                    if((currentMoney/idx) >= 1){
+                        console.log(idx+'원 : ' + Math.floor(currentMoney/idx));
+                        currentMoney%=idx;
+                    }
+                });
+                changeMoeny(0);
+                checkBtn();
+            });
+        };
+        return init();
+    })();
+</script>
+</html>
