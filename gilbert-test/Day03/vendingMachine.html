@@ -68,7 +68,7 @@
             background-color: #f90006;
         }
         .itemWrap .item .off button{
-            background-color: #111d12;
+            background-color: #ffc0e3;
         }
         .itemWrap .item li{
             float: left;
@@ -88,6 +88,9 @@
         .itemWrap .item li button{
             width: 100px;
             height: 30px;
+        }
+        .itemWrap .item .price{
+            background-color: cornsilk;
         }
         .contentWrap{
             width: 400px;
@@ -132,12 +135,36 @@
     <div class="itemWrap">
         <ul class="item">
             <li class="off">
-                <img src="http://timg.danawa.com/prod_img/500000/492/722/img/1722492_1.jpg">
+                <img src="http://cfile21.uf.tistory.com/image/213FF93A51CC471931BC77">
                 <div class="itemContent">
                     <span>코카콜라</span>
-                    <span id="price">2000원</span>
+                    <span class="price">2000원</span>
                 </div>
-                <button id="seletor">선택</button>
+                <button class="seletor">선택</button>
+            </li>
+            <li class="off">
+                <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTg_DhplG0p7-qv5Fky6D4QK_V-JMMvCC1dfbITjF61B3hjkZjo">
+                <div class="itemContent">
+                    <span>사이다</span>
+                    <span class="price">4000원</span>
+                </div>
+                <button class="seletor">선택</button>
+            </li>
+            <li class="off">
+                <img src="http://image.auction.co.kr/itemimage/d7/ea/3c/d7ea3c245.jpg">
+                <div class="itemContent">
+                    <span>환타</span>
+                    <span class="price">3000원</span>
+                </div>
+                <button class="seletor">선택</button>
+            </li>
+            <li class="off">
+                <img src="http://cdnweb01.wikitree.co.kr/webdata/editor/201605/19/img_20160519090714_81ffb715.jpg">
+                <div class="itemContent">
+                    <span>요구르트</span>
+                    <span class="price">1000원</span>
+                </div>
+                <button class="seletor">선택</button>
             </li>
         </ul>
     </div>
@@ -188,8 +215,8 @@
           var list = document.querySelectorAll('.item li');
           var currentMoney = getMoney();
           list.forEach(function(index){
-            var itemPrice = index.querySelector('#price').innerText.replace(/[^0-9]/g,"");
-            var btn = index.querySelector('#seletor');
+            var itemPrice = index.querySelector('.price').innerText.replace(/[^0-9]/g,"");
+            var btn = index.querySelector('.seletor');
 
              if(parseFloat(currentMoney) >= parseFloat(itemPrice)){
                  index.className = 'on';
@@ -208,6 +235,8 @@
                 currentMoney = parseFloat(currentMoney) - parseFloat(price);
                 changeMoeny(currentMoney);
                 checkBtn();
+            }else{
+                alert('잔액이 부족합니다.')
             }
         };
         //잔액 반환
