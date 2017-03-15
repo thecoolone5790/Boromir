@@ -186,10 +186,20 @@
 </body>
 <script>
     (function vending(){
-        var init = function(){
-            input();
-            returnMoney();
+        'use strict'
+        //이벤트 등록
+        var addEvt = function(){
+            var list = document.querySelectorAll('.item li');
+            list.forEach(function(index){
+                var itemPrice = index.querySelector('.price').innerText.replace(/[^0-9]/g,"");
+                var btn = index.querySelector('.seletor');
+
+                btn.addEventListener('click' , function(e){
+                    buyItem(itemPrice);
+                })
+            });
         };
+
         //현재 잔액
         var getMoney = function(){
             var money = document.getElementById('money').innerText;
@@ -216,27 +226,22 @@
           var currentMoney = getMoney();
           list.forEach(function(index){
             var itemPrice = index.querySelector('.price').innerText.replace(/[^0-9]/g,"");
-            var btn = index.querySelector('.seletor');
-
              if(parseFloat(currentMoney) >= parseFloat(itemPrice)){
                  index.className = 'on';
-                 btn.addEventListener('click' , function(e){
-                   buyItem(itemPrice);
-                 })
              }else{
                  index.className = 'off';
              }
           });
         };
+        //아이템 구매
         var buyItem = function(price){
             var currentMoney = getMoney();
             if(parseFloat(currentMoney) >= parseFloat(price)){
-                console.log('구매가능');
                 currentMoney = parseFloat(currentMoney) - parseFloat(price);
                 changeMoeny(currentMoney);
                 checkBtn();
             }else{
-                alert('잔액이 부족합니다.')
+                alert('잔액이 부족합니다.');
             }
         };
         //잔액 반환
@@ -255,6 +260,12 @@
                 checkBtn();
             });
         };
+        var init = function(){
+            input();
+            addEvt();
+            returnMoney();
+        };
+
         return init();
     })();
 </script>
