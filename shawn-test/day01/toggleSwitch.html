@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>토글 스위치 만들기</title>
+</head>
+<style>
+    #lightBulb {
+        background-color: aliceblue;
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+
+    }
+
+    #btn {
+        background-color: darkgoldenrod;
+        border: 1px solid darkgray;
+        position: absolute;
+        width: 60px;
+        height: 50px;
+        margin-left: 21px;
+    }
+
+    .wrapper {
+        position: relative;
+        width: 102px;
+        height: 150px;
+        margin: auto;
+    }
+    .on#lightBulb{
+        background-color: yellow;
+    }
+
+</style>
+<body>
+<div class="wrapper">
+    <div id="lightBulb"></div>
+    <button id="btn">ON/OFF</button>
+
+</div>
+<script>
+    (function () {
+        var btn = document.getElementById("btn");
+        var lightBulb = document.getElementById("lightBulb");
+
+        btn.addEventListener("click", function () {
+            if(lightBulb.className == "on"){
+                lightBulb.className = "";
+            }else{
+                lightBulb.className = "on";
+            }
+        });
+    })();
+</script>
+</body>
+</html>

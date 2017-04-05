@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>공튀기기</title>
+    <style>
+    	#Container{position:relative;width:500px;height:500px;border:1px solid #ddd}
+    	#Container .light_bulb{width:300px;height:300px;margin:30px auto;background-color:#ddd}
+    	#Container .light_bulb.on{background-color:#fee}
+    	#Container .btn_light{margin-top:10px;text-align:center}
+    	#Container .btn_light a{display:inline-block;padding:5px 10px;margin:0 5px;border:1px solid #000;border-radius:5px;background-color:#333;font-size:15px;color:#fff;text-decoration:none;}
+    </style>
+</head>
+
+<body>
+	<div id="Container">
+		<div class="light_bulb"></div>
+		<div class="btn_light">
+			<a href="javascript:;" class="btn_on">불켜기</a>
+			<a href="javascript:;" class="btn_off">불끄기</a>
+			<a href="javascript:;" class="btn_auto">불켜기/끄기</a>
+		</div>
+	</div>
+
+
+	<script>
+		(function(){
+			var Container = document.getElementById('Container');
+			var bulb = Container.getElementsByClassName('light_bulb')[0];
+			var btnOn = Container.getElementsByClassName('btn_on')[0];
+			var btnOff = Container.getElementsByClassName('btn_off')[0];
+            var btnAuto = Container.getElementsByClassName('btn_auto')[0];
+            var boo = true;
+
+			btnOn.addEventListener('click', onEvent);
+			btnOff.addEventListener('click', offEvent);
+            btnAuto.addEventListener('click', AutoEvent);
+			function onEvent(){
+				bulb.classList.add('on');
+				boo = false;
+			}
+            function offEvent(){
+                bulb.classList.remove('on');
+                boo = true;
+            }
+            function AutoEvent(){
+				if(boo === true){
+                    onEvent();
+				}else{
+                    offEvent();
+				}
+            }
+
+		})(window);
+	</script>
+
+</body>
+</html>

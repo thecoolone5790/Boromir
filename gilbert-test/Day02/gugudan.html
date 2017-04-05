@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <input type="text" id="root"> 단 ~ <input type="text" id="line"> 까지 <button id="output">출력</button>
+    <h1>구구단</h1>
+    <div id="view"></div>
+</body>
+<script>
+    var outputBtn = document.getElementById('output'); //버튼
+    var root = document.getElementById('root'); // 몇단
+    var line = document.getElementById('line'); // 몇번째까지
+    var view = document.getElementById('view'); // 뷰
+    var result = ''; //결과
+
+    outputBtn.addEventListener('click' , function(e){
+        var rootVal = root.value;
+        var lineVal = line.value;
+
+        for(var i = 1; i <= lineVal ;i++){
+            result += rootVal + ' * ' + i +' = '+ rootVal*i +'\n';
+        }
+        view.innerText = result;
+        result = '';
+    });
+
+
+</script>
+</html>

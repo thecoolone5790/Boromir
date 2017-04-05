@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <meta charset="UTF-8">
+        <style>
+            .wrapper{
+                width:100%;
+                background: #ccc;
+            }
+            .wrap{
+                width:100%;
+                max-width:600px;
+                background: #000;
+                margin: auto;
+                height: 500px;
+                color: #fff;
+            }
+            
+            
+* {
+  box-sizing: border-box;
+}
+#calculator {
+  width: 240px;
+  height: auto;
+  border: 1px solid #333;
+  border-radius: 10px;
+  overflow: hidden;
+}
+#calculator .result {
+  line-height: 120px;
+  padding: 0 10px;
+  height: 100px;
+  color: #e3e3e3;
+  font-size: 30px;
+  text-align: right;
+  background: #333;
+}
+#calculator .btn,
+#calculator .num,
+#calculator #equal{
+  float: left;
+  width: 25%;
+  height: 60px;
+  border: 1px solid #333;
+  border-bottom: none;
+  border-left: none;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+}
+#calculator .btn{
+  background: #ff4800;
+  color: #fff;
+  border-right: none;
+}
+            #calculator #equal{
+                width:100%;
+                border-right: none;
+                height: 40px;
+                background: #ff4800;
+                color: #fff;
+            }
+#calculator .btn:active,
+#calculator #equal:active{
+  background: #dd4218;
+  color: #fff;
+}
+#calculator #zero {
+  width: 50%;
+}
+#calculator .num:active {
+  background: #999;
+  color: #fff;
+}        
+            #ac{
+                width:30px;
+                height: 30px;
+                border-radius: 30px;
+                border:5px solid #f00;
+                background: #333;
+                position: absolute;
+                top: 20px;
+                left: 15px;
+            }  
+            #ac:after{
+                height: 20px;
+                width:5px;
+                background: #f00;
+                border:5px solid #333;
+                border-radius: 10px;
+                position: absolute;
+                left:50%;
+                margin-left: -8px;
+                top:-15px;
+                content: "";
+            }
+
+        </style>
+    </head>
+    <body>
+        
+        <div id="calculator" >
+          <div class="result">
+           <span id="result_txt">
+
+            </span>
+          </div>
+          
+          <input type="text" class="num" value="1" readonly>
+          <input type="text" class="num" value="2" readonly>
+          <input type="text" class="num" value="3" readonly>     
+          <input type="text" class="btn" value="+" readonly>
+          <input type="text" class="num" value="4" readonly>
+          <input type="text" class="num" value="5" readonly>
+          <input type="text" class="num" value="6" readonly>
+          <input type="text" class="btn" value="-" readonly>
+          <input type="text" class="num" value="7" readonly>
+          <input type="text" class="num" value="8" readonly>
+          <input type="text" class="num" value="9" readonly>
+          <input type="text" class="btn" value="/" readonly>
+          <input type="text" class="num" id="zero" value="0" readonly>
+          <input type="text" class="num" value="." readonly>
+            <input type="text" class="btn" value="*" readonly>
+          <input type="text" id="equal" value="=" readonly>
+        </div>
+        <button id="ac"></button>
+        <script>
+            (function(){
+                var num = document.querySelectorAll('.num');            
+                var btn = document.querySelectorAll('.btn');
+                var resultTxt = document.getElementById('result_txt');
+                var result = 0;
+                var left ='';
+                var right = '';                
+                var calculation = '';
+                var f = false;                
+                                
+                for(var i  = 0; i < num.length; i++){                                                        
+                    num[i].addEventListener('click',function(){           
+                        var val = this.value;                    
+                        if(f == false){                            
+                            left = left + val;                    
+                            resultTxt.innerHTML = left;
+                        } else{
+                            right = right + val;                    
+                            resultTxt.innerHTML = right;      
+                        }                 
+                    });
+                }                                                
+                for(var i  = 0; i < btn.length; i++){                                                        
+                    btn[i].addEventListener('click',function(){          
+                        calculation = String(this.value);
+                        f = true;                        
+                    });
+                }                
+                document.getElementById('equal').addEventListener('click',function(){                                        
+                    if(calculation ==='+'){
+                        result = Number(left) + Number(right);
+                    }else if(calculation ==='-'){
+                        result = Number(left) - Number(right);
+                    }else if(calculation ==='*'){
+                        result = Number(left) * Number(right);
+                    }else if(calculation ==='/'){
+                        result = Number(left) / Number(right);
+                    }                    
+                    resultTxt.innerHTML = result;
+                    left = result;
+                    right = '';
+                });
+                document.getElementById('ac').addEventListener('click',function(){       
+                    result = 0;
+                    left= '';
+                    right ='';
+                    f = false;
+                    calculation ='';
+                    resultTxt.innerHTML = 0;
+                });
+            })();
+
+                  
+
+        </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+

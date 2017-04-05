@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+    <head>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            ul{
+                list-style: none;
+            }
+            .vendingmachine{
+                border: 1px solid #ebebeb;
+                width: 510px;
+                padding:50px;
+                position: relative;
+            }
+            .prdlist{
+                overflow: hidden;
+            }
+            li{
+                position: relative;
+                float: left;
+                margin:10px 10px 150px;
+                width:80px;
+                height: 120px;
+                text-align: center;
+                background: url(http://images.vexels.com/media/users/2049/76215/preview2/05479507b2d215c996bd84f0b716e20a-vector-metal-can-templates.jpg)
+            }
+            .prdlist .tall{
+                width:108px;
+                height: 300px;
+            }
+            .prdlist .small{
+                width:108px;
+                height: 188px;
+            }            
+            .t1{
+                background-position: -36px -28px;
+            }
+            .t2{
+                background-position: -187px -28px;
+            }
+            .t3{
+                background-position: -337px -28px;
+            }     
+            .s1{
+                background-position: -36px -352px;
+            }
+            .s2{
+                background-position: -187px -352px;
+            }
+            .s3{
+                background-position: -337px -352px;
+            }                 
+            .on{
+                color: #f00;
+            }
+            input{
+                display: block;
+                width: 100%;
+                height: 100%;
+                text-indent: -9999px;
+                cursor: pointer;
+                background: transparent;
+                border: none;
+            }
+            label{
+                position: absolute;
+                left:50%;
+                bottom: -50px;
+                transform: translateX(-50%);
+                background: #333;
+                width:100%;
+                padding:10px;
+                color: #ccc;
+            }
+            .on+ label{
+                color: #f00;
+            }
+            .output{
+                width:200px;
+                height: 100px;
+                background: #333;
+                margin: auto;
+            }
+            #inputcash{
+                text-indent: 0;
+                width:100%;
+                background: #000;
+                height: 40px;
+                color: #fff;
+            }
+            .wrap{
+                position: absolute;
+                top:40%;
+                z-index: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="vendingmachine">
+            <div class="wrap">
+                <input type="text" id="inputcash">
+                <button id="insert" onclick="receiveMoney();">투입</button>            
+            </div>
+            <ul class="prdlist">
+                <li class="tall t1">                    
+                    <input type="text" value="2000" id="coke" class="prd">
+                    <label for="coke">2000</label>
+                </li>
+                <li class="tall t2">
+                    <input type="text" value="3000" id="cider" class="prd">
+                    <label for="cider">3000</label>
+                </li>
+                <li class="tall t3">                    
+                    <input type="text" value="25000" id="sprite" class="prd"> 
+                    <label for="sprite">25000</label>
+                </li>
+                <li class="small s1">                    
+                    <input type="text"  value="2300" id="milk" class="prd">
+                    <label for="milk ">2300</label>
+                </li>
+                <li class="small s2">                    
+                    <input type="text"  value="1500" id="milk2" class="prd">
+                    <label for="milk2 ">1500</label>
+                </li>
+                <li class=" small s3">                    
+                    <input type="text"  value="2700" id="milk3" class="prd">
+                    <label for="milk3">2700</label>
+                </li>                
+            </ul>
+            <button id="ch" onclick="cal();">내놔</button>
+            <div class="output"></div>
+        </div>
+        <script>
+            var prd = document.querySelectorAll('.prd');                
+            var cash = 0;
+            var totalPrice = 0;
+            var prdPrice = 0;
+            var change = 0;
+            var moneyType = [10000, 5000, 1000, 500, 100, 50, 10];
+            var bill = new Array;
+            var count = new Array;
+            var result = 0;
+            function receiveMoney(){
+                var inputCash = document.getElementById('inputcash');           
+                cash =  Number(cash) + Number(inputCash.value)  ;                
+                cash == 0 ? alert('돈넣어') :  
+                possiblePrice();
+            }        
+    
+            function comparePrice(){                
+                for(var i  = 0; i < prd.length; i++){                                                
+                    prd[i].addEventListener('click',function(){                                   
+                        var val = this.value;                            
+                        if(val > cash){
+                            alert('더넣어');
+                        }else{
+                            prdPrice = Number(prdPrice) + Number(val) ;  
+                            changeMoney();
+                            possiblePrice();
+                        }                        
+                    });                       
+                }                        
+            }
+
+            function possiblePrice(){
+                for(var i  = 0; i < prd.length; i++){                                                 
+                    var price = prd[i].value
+                    price <= cash ? prd[i].classList.add('on') : prd[i].classList.remove('on')                    
+                }                   
+            }
+            
+            function changeMoney(){
+                if(cash>prdPrice){
+                    Number(cash) - Number(prdPrice);
+                    change = cash - prdPrice;
+                    alert(change);
+                }else{
+                    alert('더넣어');
+                }
+            }
+            function cal(){
+                
+                for(var i = 0; i<=moneyType.length; i ++){
+                    result = change;
+                    if(result >= moneyType[i] ){
+                        count[i] = Math.floor(change / moneyType[i]);                                 
+                        change = result - (moneyType[i] * count[i]);                        
+                    }else{
+                        count[i] = 0;
+                    }
+                }                
+                alert('10000원 :' + count[0] + '개'+ '\n' + '5000원 :' + count[1] +'개' + '\n' + '1000원 :' + count[2] + '개' + '\n' + '500원 :' + count[3]+ '개' + '\n' + '100원 :' + count[4]+ '개'  )
+            }                
+            comparePrice(); 
+
+        </script>
+    </body>
+</html>

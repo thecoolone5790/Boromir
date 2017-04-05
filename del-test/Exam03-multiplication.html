@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    
+    </style>
+</head>
+<body>
+    <input type="text" id="leftNum" value="">
+    <input type="text" id="rightNum" value="">
+    <button id="result">result</button>
+    
+    <ul id="list"> 
+        
+    </ul>
+</body>
+    <script>
+    (function(){
+  
+        
+       document.getElementById('result').addEventListener('click', function(){
+              var l = document.getElementById('leftNum').value;
+                var r = document.getElementById('rightNum').value;   
+
+           
+           for(var t = 1;t<= l; t++ ){
+               
+            for(var i= 1; i <= r; i++ ){
+                
+                var li = document.createElement('li');
+                li.innerHTML = t + 'x' + i + '=' +i*t;
+                
+                document.getElementById('list').appendChild(li);
+                
+               
+                }               
+           }
+           
+           
+           
+           
+
+           
+       });
+    
+        
+     })();
+    
+    </script>
+</html>

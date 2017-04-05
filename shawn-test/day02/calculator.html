@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="calculator.css">
+</head>
+<body>
+<div class="wrapper">
+    <div id="result">
+        <div id="target">0</div>
+    </div>
+    <div>
+        <button class="num" onclick="getNumber('1')">1</button>
+        <button class="num" onclick="getNumber('2')">2</button>
+        <button class="num" onclick="getNumber('3')">3</button>
+        <button class="cal" onclick="getCalType('+')">+</button>
+        <button class="num" onclick="getNumber('4')">4</button>
+        <button class="num" onclick="getNumber('5')">5</button>
+        <button class="num" onclick="getNumber('6')">6</button>
+        <button class="cal" onclick="getCalType('-')">-</button>
+        <button class="num" onclick="getNumber('7')">7</button>
+        <button class="num" onclick="getNumber('8')">8</button>
+        <button class="num" onclick="getNumber('9')">9</button>
+        <button class="cal" onclick="getCalType('÷')">÷</button>
+        <button class="btn" onclick="allClear()">AC</button>
+        <button class="num" onclick="getNumber('0')">0</button>
+        <button class="btn" onclick="getResult()">=</button>
+        <button class="cal" onclick="getCalType('×')">×</button>
+    </div>
+</div>
+<script>
+    var target = document.getElementById('target');
+    var calFlag = false;
+    var total = '';
+    var preValue = '';
+    var nextValue = '';
+    var calType = '';
+    function getNumber(num) {
+        if (calFlag == false) {
+            preValue = preValue + num;
+            total =  total + num;
+        } else {
+            nextValue = nextValue + num;
+            total = total + num;
+
+        }
+        target.innerHTML = total;
+    }
+    function getCalType(type) {
+        calFlag = true;
+        if(nextValue == ''){
+            total = total + type;
+        }else{
+            preValue = calculate(preValue, calType, nextValue);
+            total = total + type;
+            nextValue = '';
+        }
+        target.innerHTML = total;
+        calType = type;
+    }
+    function calculate(preValue, calType, nextValue) {
+        var preNum = parseInt(preValue);
+        var nextNum = parseInt(nextValue);
+        if (calType == '+') {
+            return String(preNum + nextNum);
+        } else if (calType == '-') {
+            return String(preNum - nextNum);
+        } else if (calType == '×') {
+            return String(preNum * nextNum);
+        } else if (calType == '÷') {
+            return String(preNum / nextNum);
+        } else {
+
+        }
+    }
+    function getResult() {
+        total = calculate(preValue, calType, nextValue);;
+        target.innerHTML = total;
+        preValue = total;
+        nextValue = '';
+        calType = '';
+    }
+    function allClear() {
+        calFlag = false;
+        target.innerHTML = 0;
+        total = '';
+        preValue = '';
+        nextValue = '';
+        calType = '';
+    }
+</script>
+</body>
+</html>

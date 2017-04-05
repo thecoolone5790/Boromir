@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .black {
+            width: 100px;
+            height: 100px;
+            background-color: black;
+            float: left;
+        }
+        .white {
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            float: left;
+        }
+        .output{
+            width: auto;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" placeholder="원하는 크기의 숫자" id="input"><button id="resultBtn">입력</button>
+    <div class="output" id="output"></div>
+</body>
+<script>
+    //뷰
+    var outputView = document.getElementById('output');
+
+    //액션
+    function output(size){
+        outputView.innerHTML = ""; //다음계산을 위한 초기화
+        var size = size; //입력한 사이즈
+        outputView.style.width = size * 100 +'px'; //사이즈에따른 style 조정
+
+        for (var i = 0; i < size; i++) {
+            for (var j = 0; j < size; j++) {
+                if ((i + j) % 2 == 0)
+                    createDiv("white");
+                else
+                    createDiv("black");
+            }
+        }
+    }
+    //버튼
+    var resultBtn =  document.getElementById('resultBtn');
+    resultBtn.addEventListener('click' , function(e){
+        var size = document.getElementById('input').value;
+        output(size);
+    });
+
+    //상자 그려주는곳
+    function createDiv(className){
+        var white = document.createElement('div');
+        white.className = className;
+        outputView.appendChild(white);
+    }
+
+</script>
+</html>
