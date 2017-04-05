@@ -111,6 +111,7 @@ var Cal = (function(){
         //연산..
         document.getElementById(obj.name).addEventListener('click',function(){
             that.isResult = false;
+
             that.print(obj.symbol);
 
             if(that.num !== ''){
@@ -178,7 +179,7 @@ var Cal = (function(){
 
 
 
-// 사용자...
+// 사용자.....
 
 var screen = document.getElementById('screen');
 var numBtns = document.getElementById('btnsNum').getElementsByTagName('button');

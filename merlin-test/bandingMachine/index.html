@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>자판기</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        button{width: 100px; height: 50px;float: left;}
+        ul{list-style: none;}
+        input{width: 298px; height: 48px; font-size: 40px;}
+        #wrapper{position: relative;margin: 50px 0 0 200px; background-color: #0fff10; width: 300px;}
+        #goods{list-style: none;}
+        #return_lever{width: 200px;}
+        .on {background:#f00;color: #fff}
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <ul id="goods">
+            <li><button>품절</button></li>
+            <li><button>품절</button></li>
+            <li><button>품절</button></li>
+            <li><button>품절</button></li>
+            <li><button>품절</button></li>
+            <li><button>품절</button></li>
+        </ul>
+        <input type="number" id="insert_money">
+        <button id="insert_btn">투입</button>
+        <button id="return_lever">반환레버</button>
+        <button id="admin">관리자 모드</button>
+        <button id="open_btn">자판기 열기</button>
+        <button id="close_btn">자판기 닫기</button>
+        <button id="insert_good">상품 넣기</button>
+    </div>
+
+
+    <script src="funcBm.js"></script>
+</body>
+</html>
