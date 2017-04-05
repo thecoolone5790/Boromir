@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+
+        body {
+            line-height: 1;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        blockquote, q {
+            quotes: none;
+        }
+
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        .mainWrap {
+            background-color: #75c32f;
+            width: 400px;
+            height: 600px;
+            position: relative;
+        }
+
+        .itemWrap {
+            width: 400px;
+            height: 350px;
+            background-color: beige;
+            position: relative;
+        }
+
+        .itemWrap .item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .itemWrap .item .on button {
+            background-color: #f90006;
+        }
+
+        .itemWrap .item .off button {
+            background-color: #ffc0e3;
+        }
+
+        .itemWrap .item li {
+            float: left;
+            background-color: #0dab6c;
+            width: 100px;
+            height: 175px;
+            font-size: 14px;
+        }
+
+        .itemWrap .item li img {
+            width: 100px;
+            height: 130px;
+        }
+
+        .itemWrap .item li .itemContent {
+            width: 100px;
+            height: 15px;
+        }
+
+        .itemWrap .item li button {
+            width: 100px;
+            height: 30px;
+        }
+
+        .itemWrap .item .price {
+            background-color: cornsilk;
+        }
+
+        .contentWrap {
+            width: 400px;
+            height: 50px;
+            background-color: cornflowerblue;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contentWrap .leftContent {
+            width: 200px;
+            height: 50px;
+            position: absolute;
+            top: 20px;
+            left: 5px;
+        }
+
+        .contentWrap .rigthContent {
+            width: 200px;
+            height: 50px;
+            position: absolute;
+            top: 20px;
+            left: 300px;
+        }
+
+        .outputWrap {
+            width: 400px;
+            height: 200px;
+            background-color: #ffc0e3;
+            position: relative;
+        }
+
+        .outputWrap .output {
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            left: 100px;
+            top: 50px;
+            background-color: #2d2d2d;
+        }
+    </style>
+</head>
+
+<body>
+<div class="mainWrap">
+    <div class="itemWrap">
+        <ul class="item">
+            <li class="off">
+                <img src="http://cfile21.uf.tistory.com/image/213FF93A51CC471931BC77">
+                <div class="itemContent">
+                    <span>코카콜라</span>
+                    <span class="price">2000원</span>
+                </div>
+                <button class="seletor">선택</button>
+            </li>
+            <li class="off">
+                <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTg_DhplG0p7-qv5Fky6D4QK_V-JMMvCC1dfbITjF61B3hjkZjo">
+                <div class="itemContent">
+                    <span>사이다</span>
+                    <span class="price">4000원</span>
+                </div>
+                <button class="seletor">선택</button>
+            </li>
+            <li class="off">
+                <img src="http://image.auction.co.kr/itemimage/d7/ea/3c/d7ea3c245.jpg">
+                <div class="itemContent">
+                    <span>환타</span>
+                    <span class="price">3000원</span>
+                </div>
+                <button class="seletor">선택</button>
+            </li>
+            <li class="off">
+                <img src="http://cdnweb01.wikitree.co.kr/webdata/editor/201605/19/img_20160519090714_81ffb715.jpg">
+                <div class="itemContent">
+                    <span>요구르트</span>
+                    <span class="price">1000원</span>
+                </div>
+                <button class="seletor">선택</button>
+            </li>
+        </ul>
+    </div>
+    <div class="contentWrap">
+        <div class="leftContent">
+            <span>잔액 :</span>
+            <span id="money">0</span>
+        </div>
+        <div class="rigthContent">
+            <button id="inputMoney">돈넣기</button>
+            <button id="returnMoney">반환</button>
+        </div>
+    </div>
+    <div class="outputWrap">
+        <div class="output">
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    'use strict'
+    // 관리자
+    // 1. 음료관리 (물품 채우기 , 물품 삭제)
+    //    - 공장에서 음료수 구매
+    //    - 자판기에 음료수 채우기
+    // 2. 자산관리 (자판기에 돈 투입 , 수입 확인)
+    //    - 돈회수 (자판기 돈 회수)
+    //    - 잔돈채우기 (자판기 잔돈 채우기)
+    var Admin = function () {
+        this.money = 0;
+    };
+    Admin.prototype.inputItemVending = function(){};
+    Admin.prototype.getMoneyVending = function(){};
+    Admin.prototype.admingInputMoneyVending = function(){};
+
+    // 구매자
+    // 1. 자산관리
+    //    - 자산 (지출에 따른 개인 돈차감)
+    // 2. 음료관리 (구매한 음료수 (배열))
+    //    - 음료구매리스트 작성 (구매한 물품 및 수량 축적)
+    var Buyer = function () {
+        this.buyerList = [];
+        this.money = 0;
+    };
+    Buyer.prototype.buyerInputMoneyVending = function(){};https://github.com/GoSeokjin/JavascriptStudy.git
+    Buyer.prototype.getItem = function(){};
+    Buyer.prototype.saveGetItem = function(){};
+
+    // 자판기
+    // 1. 물품 관리
+    //    - 물품진열 (관리자가 등록한 물품 배치)
+    //    - 판매가능물품 체크 (가능한 버튼에 불들어옴)
+    //    - 판매한물품 수량 -1 (판매한 해당 물품 -1)
+    //    - 판매한물품 배출 (배출구에 판매한 물품 보여주기)
+    // 2. 잔돈관리
+    //    - 잔돈 반환 (1000 500 100 10)
+    var VendingMachine = function () {
+        this.vendingMachineList = [
+            {
+                itemName: '코카콜라',
+                price: '2000',
+                quantity : 10
+            },
+            {
+                itemName: '환타',
+                price: '800',
+                quantity : 10
+            },
+            {
+                itemName: '밀키스',
+                price: '1000',
+                quantity : 10
+            },
+            {
+                itemName: '오렌지쥬스',
+                price: '3000',
+                quantity : 10
+            },
+            {
+                itemName: '코코팜',
+                price: '600',
+                quantity : 10
+            },
+            {
+                itemName : '복분자',
+                price : '1500',
+                quantity : 10
+            }
+        ];
+        this.money = 0;
+    };
+    VendingMachine.prototype.displayItem = function(){};
+    VendingMachine.prototype.checkBtn = function(){};
+    VendingMachine.prototype.checkQuantity = function(){};
+    VendingMachine.prototype.outputItem = function(){};
+    VendingMachine.prototype.returnMoney = function(){};
+</script>
+</html>
