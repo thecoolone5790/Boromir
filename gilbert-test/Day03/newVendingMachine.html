@@ -272,13 +272,13 @@
 </div>
 </body>
 <script>
-    (function vending() {
+    (function vending(){
         'use strict';
         var admin = admin || {};
         var buyer = buyer || {};
         var vendingMachine = vendingMachine || {};
 
-        admin.money = function(){
+        admin.money = (function(){
             var money = 10000;
             var setMoney = function(){};
             var getMoney = function(){};
@@ -288,20 +288,37 @@
                 getMoney : getMoney,
                 inputReturnMoney : inputReturnMoney
             }
-        };
-        admin.item = function(){
+        })();
+
+        admin.item = (function(){
             var inputItem = function(){};
             var ouputItem = function(){};
             var displayItem = function(){};
-        };
-        admin.evt = function(){
+            return {
+                inputItem : inputItem,
+                ouputItem : ouputItem,
+                displayItem : displayItem
+            }
+        })();
+
+        admin.evt = (function(){
             var adminPassword = '1234';
             var checkAdmin = function(){};
             var displayBtnEvt = function(){};
             var inputItemBtnEvt = function(){};
             var outputItemBtnEvt = function(){};
-        };
-        vendingMachine.money = function(){
+            var init = function(){
+                checkAdmin();
+                displayBtnEvt();
+                inputItemBtnEvt();
+                outputItemBtnEvt();
+            };
+            return {
+                init : init()
+            }
+        })();
+
+        vendingMachine.money = (function(){
             var vendingMachineMoney =  0;
             var returnMoneyList = []; //현재 자판기 보유 잔돈
             var setMoney = function(){};
@@ -316,8 +333,9 @@
                 getReturnMoeny : getReturnMoeny,
                 returnMoney : returnMoney
             }
-        };
-        vendingMachine.item = function(){
+        })();
+
+        vendingMachine.item = (function(){
             var itemList = [];
             var setItem = function(){};
             var getItem = function(){};
@@ -325,16 +343,30 @@
                 setItem : setItem,
                 getItem : getItem
             }
-        };
-        vendingMachine.evt = function(){
+        })();
+
+        vendingMachine.evt = (function(){
             var btnCheckEvt = function(){};   // 자판기 버튼 이벤트처리
             var inputMoneyEvt = function(){};
             var returnMoneyEvt = function(){};
-        };
-        vendingMachine.dom = function(){
+            var init = function(){
+                btnCheckEvt();
+                inputMoneyEvt();
+                returnMoneyEvt();
+            };
+            return {
+                init : init()
+            }
+        })();
+
+        vendingMachine.dom = (function(){
             var chegeMoneyHtml = function(){};  //잔액표시 마땅한 이름이 생각나지않아 ....
-        };
-        buyer.money = function(){
+            return {
+                chegeMoneyHtml : chegeMoneyHtml
+            }
+        })();
+
+        buyer.money = (function(){
             var money = 10000;
             var setMoney = function(){};
             var getMoney = function(){};
@@ -342,8 +374,9 @@
                 setMoney : setMoney,
                 getMoney : getMoney
             }
-        };
-        buyer.item = function(){
+        })();
+
+        buyer.item = (function(){
             var itemList = [];
             var setItemList = function(){};
             var getItemList = function(){};
@@ -351,10 +384,12 @@
                 setItemList : setItemList,
                 getItemList : getItemList
             }
-        };
-        buyer.dom = function(){
+        })();
+
+        buyer.dom = (function(){
             var displayBuyItemList = function(){}; //영수증 출력
-        };
+        })();
     })();
+
 </script>
 </html>
