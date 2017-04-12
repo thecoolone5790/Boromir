@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    var vm = (function(){
+        'use strict';
+        var sell = (function(){
+            var moneyManagement = (function(){
+                var money = 0;  // 내가 넣은돈
+                var returnMoney = [];   //잔돈
+                var setMoney = function(){};    //내가 넣은돈관리
+                var getMoeny = function(){
+                    return money;
+                };
+                var getReturnMoney = function(){};    //잔돈 관리
+                var setReturnMoney = function(){};
+                return {
+                    setMoney : setMoney,
+                    getMoney : getMoeny,
+                    getReturnMoney : getReturnMoney,
+                    setReturnMoney : setReturnMoney
+                }
+            })();
+
+            var item = (function(){  //음료 판매
+                console.log('money 호출' , moneyManagement);
+              var itemList = [];
+              var inputItem = function(){};
+              var outputItem = function(){};
+              return {
+                  inputItem : inputItem,
+                  outputItem : outputItem
+              }
+            })();
+
+            var dom = (function(){
+                console.log('item호출' ,item);
+                var changeItemHtml = function(){};  // 음료수 수량 변화 ...
+                var changeMoneyHtml = function(){};  // 잔액표시
+                var displayBuyItemList = function(){}; //영수증 출력
+                return {
+                    changeItemHtml : changeItemHtml,
+                    changeMoneyHtml : changeMoneyHtml,
+                    displayBuyItemList : displayBuyItemList
+                }
+            })();
+            var evt = (function(){
+                console.log('dom호출' , dom);
+                var inputMoneyEvt = function(){};   //자판기 돈넣기
+                var btnCheckEvt = function(){};   // 자판기 버튼 이벤트처리
+                var buyItemEvt = function(){};     // 음료구매
+                var returnMoneyEvt = function(){};  // 잔돈거슬러주기
+                var init = function(){
+                    inputMoneyEvt();
+                    btnCheckEvt();
+                    buyItemEvt();
+                    returnMoneyEvt();
+                };
+                return {
+                    init : init()
+                }
+            })();
+            return {
+                moneyManagement :moneyManagement,
+                item :item,
+                dom : dom,
+                evt : evt
+            }
+        })();
+        //공급자
+        var apply = function(){
+            var adminEvt = (function(){
+                console.log('sell호출' , sell);
+                var adminPassword = '1234';
+                var checkAdmin = function(){};  //관리자 확인
+                var inputItemBtnEvt = function(){}; //음료수 채우기
+                var outputItemBtnEvt = function(){};    //음료수 빼기
+                var displayBtnEvt = function(){};   //음료수 진열하기
+                var inputReturnMoney = function(){};   //잔돈 채우기
+                var init = function(){
+                    checkAdmin();
+                    inputItemBtnEvt();
+                    outputItemBtnEvt();
+                    displayBtnEvt();
+                    inputReturnMoney();
+                };
+                return {
+                    init : init()
+                }
+            })();
+        };
+        apply();
+    })();
+</script>
+</html>
