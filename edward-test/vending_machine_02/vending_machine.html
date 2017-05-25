@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>자판기</title>
+    <style>
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        .webwrap{
+            position:relative;
+            overflow:hidden;
+        }
+        .mainWrap {
+            width: 400px;
+            position: relative;
+            float:left;
+            margin:20px;
+            border:2px solid #666;
+            border-radius:5px;
+            box-shadow:5px 5px 10px #ddd;
+            background-color:#02932b;
+        }
+        .itemWrap {
+            min-height:350px;
+            background-color:#fff;
+            position: relative;
+            margin:20px 10px;
+            padding-top:10px;
+            border:solid 1px #24b73c;
+            border-radius:10px;
+        }
+        .itemWrap .item {
+            position: relative;
+            overflow: hidden;
+        }
+        .itemWrap .item li {
+            position:relative;
+            float: left;
+            width:31.333%;
+            margin:0 1% 10px;
+            font-size: 14px;
+            padding:5px;
+            text-align:center;
+            border:1px solid #efefef;
+            border-radius:5px;
+            box-sizing: border-box;
+            background-color:#efffdc;
+        }
+        .itemWrap .item li img {
+            width:70px;
+            height:80px;
+        }
+        .itemWrap .item .off_frame{
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            border-radius:5px;
+            background-color:#000;
+            opacity:0.7;
+        }
+        .itemWrap .item .on .off_frame{
+            display:none;
+        }
+        .itemWrap .item .off .off_frame{
+            display:block;
+        }
+        .itemWrap .item .itemContent span{
+            display:block;
+            margin-top:5px;
+        }
+        .itemWrap .item .seletor {
+            width:100%;
+            border:1px solid #24b73c;
+            margin-top:5px;
+            border-radius: 5px;
+            background-color:#8ef145;
+            color:#014e17;
+            box-shadow:1px 1px 2px #999;
+        }
+        .itemWrap .item .seletor:active{
+            background-color:#69c200;
+        }
+        .itemWrap .item .on .seletor {
+            border:1px solid #24b73c;
+            background-color:#8ef145;
+            color:#014e17;
+        }
+        .itemWrap .item .off .seletor {
+            border-color:#333;
+            background-color:#666;
+            color:#999;
+        }
+        .itemWrap .item .price {
+            color:#eb1f1f;
+        }
+        .itemWrap .item .tit_item {
+            font-weight:600;
+        }
+        .itemWrap .item .num {
+            color:#333;
+        }
+        .contentWrap {
+            padding:15px 0;
+            margin:10px;
+            position: relative;
+            overflow: hidden;
+            border:solid 1px #24b73c;
+            border-radius:10px;
+            background-color:#333;
+        }
+        .contentWrap .leftContent {
+            float:left;
+            margin:2px 0 0 10px;
+            min-width:100px;
+        }
+        .contentWrap .leftContent .money_turn{
+            color:#82df0a;
+        }
+        .contentWrap .rigthContent {
+            float:right;
+            margin-right:10px;
+        }
+        .outputWrap {
+            width: 400px;
+            height: 200px;
+            position: relative;
+        }
+        .outputWrap .output {
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            left: 100px;
+            top: 50px;
+            background-color: #2d2d2d;
+            border:1px solid #24b73c;
+            text-align:center;
+        }
+        .outputWrap .change_answer{
+            display:inline-block;
+            margin-top:30px;
+            font-size:15px;
+            line-height:1.4;
+            color:#fd9a9a;
+        }
+        .outputWrap .change_answer.on{
+            display:inline-block;
+        }
+        .admin_wrap{
+            display:block;
+            float:left;
+            margin:50px 0;
+            transition:all 2s;
+            opacity:1;
+        }
+        .admin_wrap.on{
+            opacity:1;
+        }
+        .admin_wrap .admin_input{
+            padding:5px;
+            font-size:14px;
+        }
+        .admin_wrap button{
+            display:block;
+            width:100%;
+            margin-top:10px;
+            padding:5px;
+            border-radius:5px;
+            background-color:#018c0b;
+            color:#fff;
+            box-sizing:border-box;
+        }
+        .admin_item{
+            padding:20px;
+            border:solid 1px #ddd;
+        }
+        .admin_item .txt_juice{
+            font-size:14px;
+        }
+        .admin_item .list_admin li{
+            margin-bottom:10px;
+        }
+        .admin_item .btn_out{
+            background-color:#9d0000;
+        }
+        .item_delete{
+            margin-top:10px;
+        }
+        .admin_pay{
+            margin-top:50px;
+            padding:20px;
+            border:solid 1px #ddd;
+        }
+        .admin_pay .list_pay{
+            margin-bottom:20px;
+        }
+        .admin_pay .list_pay li{
+            margin-top:10px;
+            font-size:15px;
+        }
+        .admin_pay .list_pay li:first-child{
+            margin-top:0;
+        }
+        .admin_pay .txt_pay{
+            color:#666;
+        }
+        .admin_pay .txt_money{
+            font-size:18px;
+            font-weight:600;
+            color:#cd2619;
+        }
+        .admin_pay .calculation_pay{
+            padding-top:20px;
+            border-top:1px solid #ddd;
+        }
+        .order_wrap{
+            float:right;
+            position:relative;
+            margin-right:50px;
+        }
+        .order_wrap .list_order{
+            margin-top:30px;
+            padding:10px;
+            border:3px solid #666;
+            /*border-top:none;*/
+        }
+        .order_wrap .list_order li{
+            width:100px;
+            margin-top:20px;
+            text-align:center;
+        }
+        .order_wrap .list_order li:first-child{
+            margin-top:0;
+        }
+        .order_wrap .list_order img{
+            width:100%;
+        }
+        .order_wrap .tit_item{
+            margin-top:5px;
+            display:block;
+            font-weight:600;
+            color:#4d8c14;
+        }
+        .order_wrap .num{
+            display:block;
+            margin-top:5px;
+            color:#666;
+        }
+    </style>
+</head>
+
+<body>
+<div class="webwrap">
+    <div class="mainWrap">
+        <div class="itemWrap">
+            <ul class="item" id="item">
+                <li class="on">
+                    <img src="http://image.auction.co.kr/itemimage/d7/ea/3c/d7ea3c245.jpg">
+                    <div class="itemContent">
+                        <span class="tit_item">환타</span>
+                        <span class="price">3000</span>
+                        <span class="num">10</span>
+                    </div>
+                    <button class="seletor">선택</button>
+                </li>
+                <li class="off">
+                    <img src="http://image.auction.co.kr/itemimage/d7/ea/3c/d7ea3c245.jpg">
+                    <div class="itemContent">
+                        <span class="tit_item">환타</span>
+                        <span class="price">12000</span>
+                        <span class="num">10</span>
+                    </div>
+                    <button class="seletor">선택</button>
+                </li>
+                <li class="on">
+                    <img src="http://image.auction.co.kr/itemimage/d7/ea/3c/d7ea3c245.jpg">
+                    <div class="itemContent">
+                        <span class="tit_item">환타</span>
+                        <span class="price">3000</span>
+                        <span class="num">10</span>
+                    </div>
+                    <button class="seletor">선택</button>
+                </li>
+            </ul>
+        </div>
+        <div class="contentWrap">
+            <div class="leftContent">
+                <span class="money_turn">잔액 : <span id="money">0</span></span>
+            </div>
+            <div class="rigthContent">
+                <button id="inputMoney">돈넣기</button>
+                <button id="returnMoney">반환</button>
+                <button id="adminOpen">관리자</button>
+            </div>
+        </div>
+        <div class="outputWrap">
+            <div class="output">
+                <span class="change_answer">거스름돈이 부족합니다<br>그냥 기부하시죠</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin_wrap">
+        <div class="admin_item">
+            <div class="item_up">
+                <ul class="list_admin">
+                    <li>
+                        <label class="txt_juice" for="juiceName">음료수 이름</label>
+                        <input type="text" id="juiceName" class="admin_input">
+                    </li>
+                    <li>
+                        <label class="txt_juice" for="juicePrice">음료수 가격</label>
+                        <input type="text" id="juicePrice" class="admin_input">
+                    </li>
+                    <li>
+                        <label class="txt_juice" for="juiceQuantity">음료수 갯수</label>
+                        <input type="text" id="juiceQuantity" class="admin_input">
+                    </li>
+                </ul>
+                <button type="button" class="btn_in">음료수 넣기</button>
+            </div>
+            <div class="item_delete">
+                <div>
+                    <label class="txt_juice" for="juiceNameDel">음료수 이름</label>
+                    <input type="text" id="juiceNameDel" class="admin_input">
+                </div>
+                <button type="button" class="btn_out">음료수 빼기</button>
+            </div>
+
+        </div>
+
+        <div class="admin_pay">
+            <ul class="list_pay">
+                <li>
+                    <span class="txt_pay">(관리자)자본금 : <span class="now_pay txt_money">50000</span>원</span>
+                </li>
+                <li>
+                    <span class="txt_pay">(자판기)거스름 남은 돈 : <span class="change_pay txt_money">0</span>원</span>
+                </li>
+                <li>
+                    <span class="txt_pay">(자판기)수익 : <span class="revenue_pay txt_money">0</span>원</span>
+                </li>
+            </ul>
+            <div class="calculation_pay">
+                <div>
+                    <label class="txt_juice" for="changePay">거스름 넣을 돈</label>
+                    <input type="text" id="changePay" class="admin_input">
+                </div>
+                <button type="button" class="btn_in">거스름돈 넣기</button>
+                <button type="button" class="btn_in">수익챙기기</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="order_wrap">
+        <span class="order_bg"></span>
+        <ul class="list_order">
+            <li>
+                <img src="http://image.auction.co.kr/itemimage/d7/ea/3c/d7ea3c245.jpg">
+                <div class="item_oreder">
+                    <span class="tit_item">사이다</span>
+                    <span class="num">10개</span>
+                </div>
+            </li>
+            <li>
+                <img src="http://image.auction.co.kr/itemimage/d7/ea/3c/d7ea3c245.jpg">
+                <div class="item_oreder">
+                    <span class="tit_item">사이다</span>
+                    <span class="num">10개</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+
+<script>
+
+    var vm = (function () {
+        'use strict';
+        var sell = (function () {
+            var moneyManagement = (function () { //클레어
+                var money = 10000;  // 내가 넣은돈
+
+                var setMoney = function () {
+
+                };    //내가 넣은돈관리
+                var getMoeny = function () {
+                    return money;
+                };
+
+                return {
+                    setMoney: setMoney,
+                    getMoney: getMoeny
+
+                }
+            })();
+
+            var item = (function () {  //음료 판매 빵야
+                console.log('money 호출', moneyManagement);
+                var itemList = [{name:'coke', price:'2000', count:'10'},
+                    {name:'juice', price:'12700', count:'10'},{name:'coke2', price:'2000', count:'10'}];
+                var setItem = function (itemObj) {
+                    itemList.push(itemObj); //<- 관리자가 집어넣은 데이터가 들어옵니다
+
+                    console.log(itemList);
+
+
+
+                };
+                var getItem = function () {
+                    // 리스트를 가져가서 관리자가 아이템을 제거 합니다
+                    return itemList;
+                };
+
+                return {
+                    setItem: setItem,
+                    getItem: getItem
+                }
+            })();
+
+            var dom = (function () { //델
+                console.log('item호출', item);
+                var changeItemHtml = function () {
+                };  // 음료수 수량 변화 ...
+                var changeMoneyHtml = function () {
+                };  // 잔액표시
+                var displayBuyItemList = function () {
+                }; //영수증 출력
+                return {
+                    changeItemHtml: changeItemHtml,
+                    changeMoneyHtml: changeMoneyHtml,
+                    displayBuyItemList: displayBuyItemList
+                }
+            })();
+            var evt = (function () { //빵야
+                var btnCheckEvt = function () {
+                    var button = document.getElementsByClassName('seletor');
+                    var itemList = item.getItem();
+                    var money = moneyManagement.getMoney();
+
+                    for(var i=0; i<itemList.length; i++){
+                        if(itemList[i].price <= money && itemList[i].count > 0){
+                            button[i].parentNode.className = 'on';
+                        }else{
+                            button[i].parentNode.className = 'off';
+                        }
+                    }
+                };   // 자판기 버튼 이벤트처리
+
+                //자판기 돈넣기
+                var inputMoneyEvt = function () {
+                    var inputMoney = document.getElementById('inputMoney');
+                    var displyMoney = document.getElementById('money');
+
+                    inputMoney.addEventListener('click', function () {
+                        var insertedMoney = prompt('돈을 넣어주세요');
+                        var currentMoney = moneyManagement.getMoney();
+                        currentMoney += parseInt(insertedMoney);
+                        moneyManagement.setMoney(currentMoney);
+                        displyMoney.innerText = currentMoney;
+                        btnCheckEvt();
+                    });
+                };
+
+
+                var buyItemEvt = function () {
+                    var itemList = item.getItem();
+                    var money = moneyManagement.getMoney();
+                    var addEvtBtn = function(){
+                        var buyButton = document.querySelectorAll('.seletor');
+
+                        [].forEach.call(buyButton , function(btn , idx){
+                            btn.addEventListener('click' , function(e){
+                                checkBtn(e.target , idx);
+
+                            })
+                        });
+                    };
+                    var checkBtn = function(target , idx){
+
+                        var btn = target;
+                        var btnParent = btn.closest('li');
+                        if(btnParent.getAttribute('class') == 'on'){
+                            var item = itemList[idx] // 음료수 갯수
+                            item.count -= 1;
+                            returnMoneyItem(idx);
+                        }
+                        btnCheckEvt();  //빵야 버튼이벤트
+
+                    };
+
+                    var returnMoneyItem = function (idx) {
+                        var moneyReturn = money -= itemList[idx].price;
+                        console.log(moneyReturn);
+                    };
+                    var eventBtn = function(){
+                        addEvtBtn();
+                    };
+                    eventBtn();
+
+
+                };     // 음료구매
+                var returnMoneyEvt = function () {
+
+                }
+                // 잔돈거슬러주기
+                var init = function () {
+                    inputMoneyEvt();
+                    btnCheckEvt();
+                    buyItemEvt();
+                    returnMoneyEvt();
+                };
+                return {
+                    init: init()
+                }
+            })();
+            return {
+                moneyManagement: moneyManagement,
+                item: item,
+                dom: dom,
+                evt: evt
+            }
+        })();
+        //공급자 - 에드워드 / 션
+        var supply = function () {
+            var adminEvt = (function () {
+                console.log('sell호출', sell);
+                var checkBtn = document.getElementById('adminBtn');
+                var itemName = document.getElementById('itemName');
+                var itemPrice = document.getElementById('itemPrice');
+                var itemCount = document.getElementById('itemCount');
+                var insertItem = document.getElementById('insertItem');
+                var deleteItem = document.getElementById('deleteItem');
+                var adminPassword = '1234';
+                var isDoorOpen = false;
+
+                //관리자 확인 - 션
+                var checkAdmin = function () {
+                    checkBtn.addEventListener('click', function () {
+                        var insertedPwd = prompt('비밀번호를 입력하세요!');
+                        insertedPwd == adminPassword ? isDoorOpen = true : isDoorOpen = false;
+                        console.log('isDoorOpen : ', isDoorOpen);
+                    });
+                };
+
+                //음료수 채우기 - 션
+                var inputItemBtnEvt = function () {
+                    insertItem.addEventListener('click', function () {
+                        if (isDoorOpen) {
+                            var itemObj = {
+                                name: itemName.value,
+                                price: itemPrice.value,
+                                count: itemCount.value
+                            };
+                            sell.item.setItem(itemObj);
+                        }
+                    });
+
+                };
+                //음료수 빼기 - 션
+                var outputItemBtnEvt = function () {
+                    deleteItem.addEventListener('click', function () {
+                        if (isDoorOpen) {
+                            var itemList = sell.item.getItem()[0];
+                            console.log(itemList);
+
+                            for(var i = 0; i < itemList.length; i++){
+                                if(this.name == itemName.value){
+//                                    console.log()
+                                    this.count = parseInt(this.count) - parseInt(itemCount.value);
+                                }
+                            }
+                        }
+                    });
+                };
+                var displayBtnEvt = function () {
+                };   //음료수 진열하기
+
+
+                var init = function () {
+                    checkAdmin();
+                    inputItemBtnEvt();
+                    outputItemBtnEvt();
+                    displayBtnEvt();
+                };
+
+                return {
+                    init: init()
+                }
+            })();
+        };
+//        supply();
+    })();
+</script>
+</html>

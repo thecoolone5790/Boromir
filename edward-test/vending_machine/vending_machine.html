@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>자판기</title>
+    <style>
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        .webwrap{
+            position:relative;
+            overflow:hidden;
+        }
+        .mainWrap {
+            width: 400px;
+            position: relative;
+            float:left;
+            margin:20px;
+            border:2px solid #666;
+            border-radius:5px;
+            box-shadow:5px 5px 10px #ddd;
+            background-color:#02932b;
+        }
+        .itemWrap {
+            min-height:350px;
+            background-color:#fff;
+            position: relative;
+            margin:20px 10px;
+            padding-top:10px;
+            border:solid 1px #24b73c;
+            border-radius:10px;
+        }
+        .itemWrap .item {
+            position: relative;
+            overflow: hidden;
+        }
+        .itemWrap .item li {
+            position:relative;
+            float: left;
+            width:31.333%;
+            margin:0 1% 10px;
+            font-size: 14px;
+            padding:5px;
+            text-align:center;
+            border:1px solid #efefef;
+            border-radius:5px;
+            box-sizing: border-box;
+            background-color:#efffdc;
+        }
+        .itemWrap .item li img {
+            width:70px;
+            height:80px;
+        }
+        .itemWrap .item .off_frame{
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            border-radius:5px;
+            background-color:#000;
+            opacity:0.7;
+        }
+        .itemWrap .item .on .off_frame{
+            display:none;
+        }
+        .itemWrap .item .off .off_frame{
+            display:block;
+        }
+        .itemWrap .item .itemContent span{
+            display:block;
+            margin-top:5px;
+        }
+        .itemWrap .item .seletor {
+            width:100%;
+            border:1px solid #24b73c;
+            margin-top:5px;
+            border-radius: 5px;
+            background-color:#8ef145;
+            color:#014e17;
+            box-shadow:1px 1px 2px #999;
+        }
+        .itemWrap .item .seletor:active{
+            background-color:#69c200;
+        }
+        .itemWrap .item .on .seletor {
+            border:1px solid #24b73c;
+            background-color:#8ef145;
+            color:#014e17;
+        }
+        .itemWrap .item .off .seletor {
+            border-color:#333;
+            background-color:#666;
+            color:#999;
+        }
+        .itemWrap .item .price {
+            color:#eb1f1f;
+        }
+        .itemWrap .item .tit_item {
+            font-weight:600;
+        }
+        .itemWrap .item .num {
+            color:#333;
+        }
+        .contentWrap {
+            padding:15px 0;
+            margin:10px;
+            position: relative;
+            overflow: hidden;
+            border:solid 1px #24b73c;
+            border-radius:10px;
+            background-color:#333;
+        }
+        .contentWrap .leftContent {
+            float:left;
+            margin:2px 0 0 10px;
+            min-width:100px;
+        }
+        .contentWrap .leftContent .money_turn{
+            color:#82df0a;
+        }
+        .contentWrap .rigthContent {
+            float:right;
+            margin-right:10px;
+        }
+        .outputWrap {
+            width: 400px;
+            height: 200px;
+            position: relative;
+        }
+        .outputWrap .output {
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            left: 100px;
+            top: 50px;
+            background-color: #2d2d2d;
+            border:1px solid #24b73c;
+            text-align:center;
+        }
+        .outputWrap .change_answer{
+            display:inline-block;
+            margin-top:30px;
+            font-size:15px;
+            line-height:1.4;
+            color:#fd9a9a;
+        }
+        .outputWrap .change_answer.on{
+            display:inline-block;
+        }
+        .admin_wrap{
+            display:block;
+            float:left;
+            margin:50px 0;
+            transition:all 2s;
+            opacity:1;
+        }
+        .admin_wrap.on{
+            opacity:1;
+        }
+        .admin_wrap .admin_input{
+            padding:5px;
+            font-size:14px;
+        }
+        .admin_wrap button{
+            display:block;
+            width:100%;
+            margin-top:10px;
+            padding:5px;
+            border-radius:5px;
+            background-color:#018c0b;
+            color:#fff;
+            box-sizing:border-box;
+        }
+        .admin_item{
+            padding:20px;
+            border:solid 1px #ddd;
+        }
+        .admin_item .txt_juice{
+            font-size:14px;
+        }
+        .admin_item .list_admin li{
+            margin-bottom:10px;
+        }
+        .admin_item .btn_out{
+            background-color:#9d0000;
+        }
+        .item_delete{
+            margin-top:10px;
+        }
+        .admin_pay{
+            margin-top:50px;
+            padding:20px;
+            border:solid 1px #ddd;
+        }
+        .admin_pay .list_pay{
+            margin-bottom:20px;
+        }
+        .admin_pay .list_pay li{
+            margin-top:10px;
+            font-size:15px;
+        }
+        .admin_pay .list_pay li:first-child{
+            margin-top:0;
+        }
+        .admin_pay .txt_pay{
+            color:#666;
+        }
+        .admin_pay .txt_money{
+            font-size:18px;
+            font-weight:600;
+            color:#cd2619;
+        }
+        .admin_pay .calculation_pay{
+            padding-top:20px;
+            border-top:1px solid #ddd;
+        }
+        .order_wrap{
+            float:right;
+            position:relative;
+            margin-right:50px;
+        }
+        .order_wrap .list_order{
+            margin-top:30px;
+            padding:10px;
+            border:3px solid #666;
+            /*border-top:none;*/
+        }
+        .order_wrap .list_order li{
+            width:100px;
+            margin-top:20px;
+            text-align:center;
+        }
+        .order_wrap .list_order li:first-child{
+            margin-top:0;
+        }
+        .order_wrap .list_order img{
+            width:100%;
+        }
+        .order_wrap .tit_item{
+            margin-top:5px;
+            display:block;
+            font-weight:600;
+            color:#4d8c14;
+        }
+        .order_wrap .num{
+            display:block;
+            margin-top:5px;
+            color:#666;
+        }
+    </style>
+</head>
+
+<body>
+<div class="webwrap">
+    <div class="mainWrap">
+        <div class="itemWrap">
+            <ul class="item" id="item">
+                <li class="on">
+                    <img src="http://image.auction.co.kr/itemimage/d7/ea/3c/d7ea3c245.jpg">
+                    <div class="itemContent">
+                        <span class="tit_item">환타</span>
+                        <span class="price">3000</span>
+                        <span class="num">10</span>
+                    </div>
+                    <button class="seletor">선택</button>
+                </li>
+                <li class="off">
+                    <img src="http://image.auction.co.kr/itemimage/d7/ea/3c/d7ea3c245.jpg">
+                    <div class="itemContent">
+                        <span class="tit_item">환타</span>
+                        <span class="price">3000</span>
+                        <span class="num">10</span>
+                    </div>
+                    <button class="seletor">선택</button>
+                </li>
+            </ul>
+        </div>
+        <div class="contentWrap">
+            <div class="leftContent">
+                <span class="money_turn">잔액 : <span id="money">0</span></span>
+            </div>
+            <div class="rigthContent">
+                <button id="inputMoney">돈넣기</button>
+                <button id="returnMoney">반환</button>
+                <button id="adminOpen">관리자</button>
+            </div>
+        </div>
+        <div class="outputWrap">
+            <div class="output">
+                <span class="change_answer">거스름돈이 부족합니다<br>그냥 기부하시죠</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin_wrap">
+        <div class="admin_item">
+            <div class="item_up">
+                <ul class="list_admin">
+                    <li>
+                        <label class="txt_juice" for="juiceName">음료수 이름</label>
+                        <input type="text" id="juiceName" class="admin_input">
+                    </li>
+                    <li>
+                        <label class="txt_juice" for="juicePrice">음료수 가격</label>
+                        <input type="text" id="juicePrice" class="admin_input">
+                    </li>
+                    <li>
+                        <label class="txt_juice" for="juiceQuantity">음료수 갯수</label>
+                        <input type="text" id="juiceQuantity" class="admin_input">
+                    </li>
+                </ul>
+                <button type="button" class="btn_in">음료수 넣기</button>
+            </div>
+            <div class="item_delete">
+                <div>
+                    <label class="txt_juice" for="juiceNameDel">음료수 이름</label>
+                    <input type="text" id="juiceNameDel" class="admin_input">
+                </div>
+                <button type="button" class="btn_out">음료수 빼기</button>
+            </div>
+
+        </div>
+
+        <div class="admin_pay">
+            <ul class="list_pay">
+                <li>
+                    <span class="txt_pay">(관리자)자본금 : <span class="now_pay txt_money">50000</span>원</span>
+                </li>
+                <li>
+                    <span class="txt_pay">(자판기)거스름 남은 돈 : <span class="change_pay txt_money">0</span>원</span>
+                </li>
+                <li>
+                    <span class="txt_pay">(자판기)수익 : <span class="revenue_pay txt_money">0</span>원</span>
+                </li>
+            </ul>
+            <div class="calculation_pay">
+                <div>
+                    <label class="txt_juice" for="changePay">거스름 넣을 돈</label>
+                    <input type="text" id="changePay" class="admin_input">
+                </div>
+                <button type="button" class="btn_in">거스름돈 넣기</button>
+                <button type="button" class="btn_in">수익챙기기</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="order_wrap">
+        <span class="order_bg"></span>
+        <ul class="list_order">
+            <li>
+                <img src="http://image.auction.co.kr/itemimage/d7/ea/3c/d7ea3c245.jpg">
+                <div class="item_oreder">
+                    <span class="tit_item">사이다</span>
+                    <span class="num">10개</span>
+                </div>
+            </li>
+            <li>
+                <img src="http://image.auction.co.kr/itemimage/d7/ea/3c/d7ea3c245.jpg">
+                <div class="item_oreder">
+                    <span class="tit_item">사이다</span>
+                    <span class="num">10개</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+
+<script>
+    (function vending() {
+        'use strict'
+        var adminPassword = '복숭아';  //관리자 비밀번호var adminPassword = '복숭아';  //관리자 비밀번호
+        var adminMoney = 0;
+        var buyerMoney = 10000;
+        var machineMoney= 0;
+        var buyerItemList = [];
+        var vendingMachineList = [
+            {
+                itemName: '코카콜라',
+                price: 2000,
+                quantity: 10,
+                img : 'http://cfile21.uf.tistory.com/image/213FF93A51CC471931BC77'
+            },
+            {
+                itemName: '사이다',
+                price: 4000,
+                quantity: 10,
+                img : 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTg_DhplG0p7-qv5Fky6D4QK_V-JMMvCC1dfbITjF61B3hjkZjo'
+            },
+            {
+                itemName: '환타',
+                price: 3000,
+                quantity: 10,
+                img : 'http://image.auction.co.kr/itemimage/d7/ea/3c/d7ea3c245.jpg'
+            },
+            {
+                itemName: '요구르트',
+                price: 1000,
+                quantity: 10,
+                img : 'http://cdnweb01.wikitree.co.kr/webdata/editor/201605/19/img_20160519090714_81ffb715.jpg'
+            }
+        ];
+        // 관리자
+        // 1. 음료관리 (물품 채우기 , 물품 삭제)
+        //    - 자판기에 음료수 채우기
+        // 2. 자산관리 (자판기에 돈 투입 , 수입 확인)
+        //    - 돈회수 (자판기 돈 회수)
+        //    - 잔돈채우기 (자판기 잔돈 채우기)
+        //관리자 로그인
+        var adminLogin = function (){
+            var adminOpenBtn = document.getElementById('adminOpen');
+            var adminwrap = document.getElementsByClassName('admin_wrap')[0];
+            adminOpenBtn.addEventListener('click', function(){
+                var adminPass = prompt('비밀번호를 입력하세요','비밀번호 힌트는 과일');
+                if(adminPass == adminPassword){
+                    adminwrap.style.display = 'block';
+                    setInterval(function(){
+                        adminwrap.classList.add('on');
+                    },200);
+                }else{
+                    alert('비밀번호를 다시 입력하세요');
+                }
+            });
+        };
+        // 음료수 채우기 이벤트
+        var adminInputItemVending = function (){
+            var content = document;
+            var juiceName = content.getElementById('juiceName');
+            var juicePrice = content.getElementById('juicePrice');
+            var juiceQuantity = content.getElementById('juiceQuantity');
+            var juiceNameDel = content.getElementById('juiceNameDel');
+            var adminBtn = content.getElementsByClassName('btn_in')[0];
+            var adminBtnOut = content.getElementsByClassName('btn_out')[0];
+            adminBtn.addEventListener('click', getItem);
+            adminBtnOut.addEventListener('click', outItem);
+        };
+        //음료수 채우기 버튼
+        function getItem(evt){
+            var nameValue = juiceName.value;
+            var priceValue = juicePrice.value;
+            var quantityValue = juiceQuantity.value;
+            itemChange(nameValue,priceValue,quantityValue);
+        }
+        //음료수 지우기 버튼
+        function outItem(evt){
+            var nameValueDel = juiceNameDel.value;
+            itemDelete(nameValueDel);
+        }
+        //음료수 채우기, 가격바꾸기
+        var itemChange = function(nameValue,priceValue,quantityValue){
+            var itemAnswer = '입력을 정확하게 하십시오';
+            var searchItem = false;
+            var index = 0;
+            var itemAarry = {
+                itemName : nameValue,
+                price : parseInt(priceValue),
+                quantity : parseInt(quantityValue)
+            };
+            for(var i = 0; i < vendingMachineList.length; i++){
+                if(vendingMachineList[i].itemName == nameValue){
+                    searchItem = true;
+                    index = i;
+                }
+            }
+            if(searchItem == true){
+                if(priceValue === '' || quantityValue === ''){
+                    alert(itemAnswer);
+                }else{
+                    vendingMachineList[index].price = priceValue;
+                    vendingMachineList[index].quantity += parseInt(quantityValue);
+                }
+            }else if(nameValue === '' || priceValue === '' || quantityValue === ''){
+                alert(itemAnswer);
+            }else{
+                vendingMachineList.push(itemAarry);
+            }
+            console.log(vendingMachineList);
+            vendingDisplayItem();
+        };
+        //음료수 없애기
+        var itemDelete = function(nameValueDel){
+            var searchItem = false;
+            var index = 0;
+            for(var i = 0; i < vendingMachineList.length; i++){
+                if(vendingMachineList[i].itemName == nameValueDel){
+                    searchItem = true;
+                    index = i;
+                }
+            }
+            if(searchItem == true){
+                vendingMachineList.splice(index,1);
+            }else{
+                alert('음료수 이름을 정확하게 입력하세요!');
+            }
+            console.log(vendingMachineList);
+            vendingDisplayItem();
+        };
+        // 관리자 실행
+        var adminInit = function(){
+            adminLogin();  //관리자 로그인
+            adminInputItemVending();  //음료수 채우기 뺴기
+        }
+        adminInit();
+        // 구매자
+        // 1. 자산관리
+        //    - 자산 (지출에 따른 개인 돈차감)
+        // 2. 음료관리 (구매한 음료수 (배열))
+        //    - 음료구매리스트 작성 (구매한 물품 및 수량 축적)
+        function buyerGetItem() {
+            buyerItemList.forEach(function (value) {
+                console.log('이름 : ', value.itemName, '수량 : ', value.number + '\n');
+            });
+        };
+        function buyerSaveItem(itemName , number){
+            var obj = {
+                itemName : itemName,
+                number : number
+            };
+            buyerItemList.push(obj);
+            buyerGetItem();
+        }
+        function addMoney(){   //돈추가
+            buyerMoney = buyerMoney + money;
+        }
+        function minusMoney(){ // 돈빼기
+            if(money > buyerMoney){
+                alert('즐 ...');
+            }else{
+                buyerMoney = buyerMoney - money;
+            }
+        }
+        function getMoney(){	// 돈 리턴
+            return buyerMoney;
+        }
+        // 자판기
+        // 1. 물품 관리
+        //    - 물품진열 (관리자가 등록한 물품 배치)
+        //    - 판매가능물품 체크 (가능한 버튼에 불들어옴)
+        //    - 판매한물품 수량 -1 (판매한 해당 물품 -1)
+        //    - 판매한물품 배출 (배출구에 판매한 물품 보여주기)
+        // 2. 잔돈관리
+        //    - 잔돈 반환 (1000 500 100 10)
+        var vendingDisplayItem = function () {
+            //var li = document.getElementById('check');
+            var target = document.getElementById('item');
+            target.innerHTML='';
+            for(var i = 0; i < vendingMachineList.length; i++){
+                var li = document.createElement('li');
+                var img = document.createElement('img');
+                var div = document.createElement('div');
+                var button = document.createElement('button');
+                var itemSpan = document.createElement('span');
+                var priceSpan = document.createElement('span');
+                var numSpan = document.createElement('span');
+                //var frameSpan =document.createElement('span');
+                //target.insertAdjacentHTML('beforeend',li);
+                li.setAttribute('class','off');
+                img.setAttribute('src',vendingMachineList[i].img);
+                div.setAttribute('class','itemContent');
+                itemSpan.setAttribute('class','tit_item');
+                priceSpan.setAttribute('class','price');
+                numSpan.setAttribute('class','num');
+                //frameSpan.setAttribute('class','off_frame');
+                button.setAttribute('class','seletor');
+                itemSpan.innerHTML = vendingMachineList[i].itemName;
+                priceSpan.innerHTML = String(vendingMachineList[i].price);
+                numSpan.innerHTML = String(vendingMachineList[i].quantity);
+                button.innerHTML = '선택';
+                target.appendChild(li);
+                li.appendChild(img);
+                li.appendChild(div);
+                div.appendChild(itemSpan);
+                div.appendChild(priceSpan);
+                div.appendChild(numSpan);
+                li.appendChild(button);
+                //li.appendChild(frameSpan);
+            }
+        };
+        var vendingCheckBtn = function () {
+        	console.log(machineMoney);
+            for (var i = 0; i < vendingMachineList.length; i++) {
+                var item = document.getElementsByClassName('itemContent')[i].getElementsByTagName('span')[0];
+                if (machineMoney >= vendingMachineList[i].price) {
+                    if (vendingMachineList[i].itemName == item.innerHTML && vendingMachineList[i].quantity > 0) {
+                        item.parentNode.parentNode.className = 'on';
+                    }else if(vendingMachineList[i].quantity == 0){
+                        item.parentNode.parentNode.className = 'noquantity';
+                    }
+                } else {
+                    item.parentNode.parentNode.className = 'off';
+                }
+            }
+        };
+        var vendingCheckQuantity = function () {
+            var button = document.getElementsByClassName('seletor');
+            for (var j = 0; j < button.length; j++) {
+                button[j].addEventListener('click', function () {
+                    var item = this.parentNode.getElementsByTagName('span')[0].innerHTML;
+                    if (this.parentNode.getAttribute('class') == 'on') {
+                        for (var k = 0; k < vendingMachineList.length; k++) {
+                            if (item == vendingMachineList[k].itemName) {
+                                if (vendingMachineList[k].quantity == 0) {
+                                    this.parentNode.className = 'off';
+                                } else {
+                                    vendingMachineList[k].quantity--;
+                                    buyerMoney = buyerMoney - vendingMachineList[k].price;
+                                    machineMoney = machineMoney - vendingMachineList[k].price;
+                                    document.getElementById('money').innerText = String(machineMoney) ;
+                                    vendingCheckBtn();
+                                    buyerSaveItem(vendingMachineList[k].itemName, 1);
+                                    // console.log(vendingMachineList[k].quantity);
+
+                                    changeItemNum(k, vendingMachineList[k].quantity);
+                                }
+                            }
+                        }
+                    }
+                }, false);
+            }
+        };
+
+        var changeItemNum = function(num, quantity){
+        	var ItemNum = document.getElementsByClassName('num')[num];
+        	ItemNum.innerHTML = quantity;
+        }
+
+        var vendingOutputItem = function () {
+        };
+        
+        var inputMoney = function(){
+            var money = parseInt(prompt('돈을 넣어주세요'));
+            if(!isNaN(money)){
+                if(money%100 != 0){
+                    machineMoney += money;
+                    minusMoney();
+                    document.getElementById('money').innerText = String(machineMoney) ;
+                    //vendingReturnMoney();
+                    returnMoney(machineMoney);
+                    machineMoney = 0;
+                }else{
+                    machineMoney += money;
+                    document.getElementById('money').innerText = String(machineMoney);
+                }
+            }else{
+                alert('돈을 넣어라!!!');
+            }
+        };
+        var changing = function(money, measure) {
+            var change = (money % measure);
+            return parseInt(change);
+        };
+        var chageCounting = function(money, measure){
+            var changeCount = (money / measure);
+            return parseInt(changeCount);
+        };
+        var returnMoney  = function (mMoney){
+            var checkMoney = mMoney;
+            var check = 0;
+            var changeList = [10000 , 5000 , 1000 , 500 , 100];
+            var value = [];
+            var val = '';
+            for(var i = 0; i < changeList.length; i++){
+                if(checkMoney == 0){
+                    break;
+                }else{
+                    check = chageCounting(checkMoney, changeList[i]);
+                    checkMoney = changing(checkMoney, changeList[i]);
+                    value.push({'number' : check, 'dan' : changeList[i]});
+                }
+            }
+            for(var j=0; j<value.length; j++){
+                if(value[j].number != 0){
+                    val += value[j].dan+" 짜리 "+value[j].number+"장";
+                }
+            }
+            alert('잔돈은'+machineMoney+'입니다.'+val);
+            machineMoney = 0;
+            document.getElementById('money').innerText = String(machineMoney);
+            vendingCheckBtn();
+        };
+        document.getElementById('inputMoney').addEventListener('click',function(){
+            inputMoney();
+            vendingCheckBtn();
+            vendingCheckQuantity();
+        });
+        document.getElementById('returnMoney').addEventListener('click',function(){
+            //vendingReturnMoney();
+            returnMoney(machineMoney);
+        });
+        var init = function () {
+            vendingDisplayItem();
+        };
+        return init();
+    })();
+</script>
+</html>

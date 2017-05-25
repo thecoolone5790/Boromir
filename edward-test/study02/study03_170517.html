@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>가위바위보</title>
+
+    <style>
+        body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,textarea,p,blockquote,th,td,input,select,button{margin:0;padding:0}
+        fieldset,img{border:0 none}
+        dl,ul,ol,menu,li{list-style:none}
+        blockquote, q{quotes: none}
+        blockquote:before, blockquote:after,q:before, q:after{content:'';content:none}
+        input,select,textarea,button{vertical-align:middle}
+        input::-ms-clear{display:none}
+        button{border:0 none;background-color:transparent;cursor:pointer}
+        body{background:#fff}
+        body,th,td,input,select,textarea,button{font-size:12px;line-height:1.5;font-family:'돋움',dotum,sans-serif;color:#333} /* color값은 디자인가이드에 맞게사용 */
+        a{color:#333;text-decoration:none}
+        a:active, a:hover{text-decoration:underline}
+        a:active{background-color:transparent}
+        address,caption,cite,code,dfn,em,var{font-style:normal;font-weight:normal}
+
+        .cont_wrap{overflow:hidden;position:relative;width:500px;margin:30px auto}
+        .cont_wrap .my_box{position:relative;float:left;width:50%;height:200px;background-color:#ddd}
+        .cont_wrap .rock_box .rock_txt{display:inline-block;position:absolute;top:30%;left:20%;width:100px;padding:20px;font-size:20px;font-weight:bold;background-color:#333;text-align:center;color:#fff}
+        .cont_wrap .you_box{position:relative;float:left;width:50%;height:200px;background-color:#fcc}
+        .cont_wrap .list_rock li{display:none;position:absolute;top:30%;left:20%;width:100px;padding:20px;font-size:20px;font-weight:bold;background-color:#333;text-align:center;color:#fff}
+        .cont_wrap .list_rock .on{display:inline-block}
+
+        .time_wrap{width:600px;margin:70px auto 0;padding:20px;border:1px solid #ddd}
+        .time_wrap .time_txt{display:block;margin:10px 0;text-align:center}
+        .btn_box{margin-top:10px;text-align:center}
+        .btn_box .link_time{display:inline-block;padding:10px;font-size:17px;border:1px solid #ddd;background-color:#eee}
+    </style>
+</head>
+<body>
+    <div class="cont_wrap">
+        <div class="rock_box my_box">
+            <span class="rock_txt my_txt"></span>
+        </div>
+        <div class="rock_box you_box">
+            <span class="rock_txt you_txt"></span>
+        </div>
+        <span class="result_rock"></span>
+    </div>
+
+    <div class="time_wrap">
+        <span class="time_txt date"></span>
+        <span class="time_txt here_time"></span>
+        <span class="time_txt uk_time"></span>
+    </div>
+    <div class="btn_box"><a href="javascript:;" class="link_time">스타트</a></div>
+
+
+    <script>
+        (function(){
+
+            var doc = document;
+            //가위바위보 게임
+            var rockGame = function(){
+                var my_choice = prompt('가위바위보입니다','하나를 골라 써주세요');
+                var Arr = ['가위','바위','보'];
+                var rockMyContent = doc.getElementsByClassName('my_txt')[0];
+                var rockYouContent = doc.getElementsByClassName('you_txt')[0];
+                var resultContent = doc.getElementsByClassName('result_rock')[0];
+                var random = Math.floor(Math.random() * 3);
+                var rockArr = Arr[random];
+                console.log(random);
+                console.log(rockArr);
+
+                var choiceFun = function(){
+                    rockMyContent.innerHTML=my_choice;
+                    rockYouContent.innerHTML=rockArr;
+                }
+
+                var winFun = function(){
+                    resultContent.innerHTML='내가 이겼다';
+                    choiceFun();
+                }
+                var loseFun = function(){
+                    resultContent.innerHTML='상대방이 이겼다';
+                    choiceFun();
+                }
+
+                var rockFun = function(){
+                    if(my_choice == rockArr){
+                        resultContent.innerHTML='비겼다';
+                        choiceFun();
+                    }else if(my_choice == '바위'){
+                        if(rockArr == '가위'){
+                            winFun();
+                        }else{
+                            loseFun();
+                        }
+                    }else if(my_choice == '가위'){
+                        if(rockArr == '보'){
+                            winFun();
+                        }else{
+                            loseFun();
+                        }
+                    }else if(my_choice == '보'){
+                        if(rockArr == '바위'){
+                            winFun();
+                        }else{
+                            loseFun();
+                        }
+                    }
+                }
+                rockFun();
+            }
+
+            rockGame();
+
+            //타임
+
+            var timeFun = function(){
+                var date = new Date(Date.now());
+                var dateTxt = doc.getElementsByClassName('date')[0];
+                var hereTime = doc.getElementsByClassName('here_time')[0];
+                var UKTime = doc.getElementsByClassName('uk_time')[0];
+                var linkTime = doc.getElementsByClassName('link_time')[0];
+                var month = date.getMonth() + 1;
+                console.log(date);
+                
+
+                
+
+                linkTime.addEventListener('click', timestart);
+                
+
+                function timeGo(){
+                    dateTxt.innerHTML = date.getFullYear() + '년' + month + '월' + date.getDate() + '일';
+                    hereTime.innerHTML = date.getHours() + '시' + date.getMinutes() + '분' + date.getSeconds() + '초' + date.getMilliseconds();
+                }
+
+                function timestart(){
+
+                    var on = false;
+                    if(on == false){
+                        setInterval(timeGo);
+                        var on = true;
+                    }else{
+                        clearInterval(timeGo);
+                        var on = false;
+                    }
+
+                }
+
+            }
+
+            timeFun();
+
+
+
+        })(window);
+    </script>
+</body>
+
+
+
+
+</html>
